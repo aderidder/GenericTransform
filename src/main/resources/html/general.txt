@@ -1,0 +1,13 @@
+<html>
+   <head>
+   </head>
+   <body>
+      <h1>Introduction</h1>
+      <h2>Aim</h2>
+      The aim of the Generic Transform Tool is to make mapping your data to the OpenClinica CRF fields easier and with fewer mistakes. 
+      <h2>How</h2>
+      The tool aims to achieve this, by applying user-defined templates to the data. These templates contain e.g. the re-coding information for fields, tell whether the data should meet a date-format, etc. By decoupling the data from the templates, it is easy to re-apply a template. This is extremely useful as during data conversion often source data needs to be corrected, mistakes in codings are found, results are not what you'd hoped them to be, etc. Furthermore, the templates can contain logic to further clean the data.
+      <h2>Where to Start</h2>
+      If this is your first time, we suggest simply working through the help topics and the examples. Although it may seem complicated at first, the program has been used succesfully in multiple data conversion projects. 
+   </body>
+</html>

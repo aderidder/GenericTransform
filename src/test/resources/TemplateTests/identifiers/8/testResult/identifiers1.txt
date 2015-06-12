@@ -1,0 +1,4 @@
+StudySubjectID	studienr	geboortedatum	visitdate
+V-04-S	V-04-S	1980	29/08/2006
+V-04-S	V-04-S	1980	29/11/2006
+V-02-A	V-02-A	1960	17/05/2006

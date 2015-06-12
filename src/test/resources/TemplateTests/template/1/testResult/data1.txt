@@ -1,0 +1,4 @@
+PersonID	StudySubjectID	DateOfDiagnosis	LabRF	LabRFPos	Weigth	WeightEmpty	Nothing
+V-03-P	V-03-P	2002-01-20	5	Neg	87.99		
+V-02-A	V-02-A	2006-05-17	80	Pos		-1	
+V-04-S	V-04-S	2006-08-29	13	Pos	60.63		

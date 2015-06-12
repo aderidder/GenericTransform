@@ -1,0 +1,13 @@
+PersonID	ID	PersonID								
+StudySubjectID	ID	StudySubjectID								
+Medication	G1	Copy	Med_0							
+MedDose	G1	Copy	MedDose_0					RoundValue		1
+MedDose2	G1	Copy	MedDose_0							
+MedDose3	G1	Copy	MedDose_0							
+MedDose4	G1	Copy	MedDose_0							
+MedDoseXor	G1	None						XorResultCol	MedDose2=25	MedDose2 was 25
+MedDoseIfResultCol	G1	None						SetValIfResultCol	MedDose=25	MedDose is 25
+								SetValIfResultCol	MedDose=5	MedDose is 5
+MedDoseXor2	G1	None						XorResultCol	MedDose3=25&MedDose4=25	MedDose3 and MedDose4 were 25
+MedDoseIfResultCol2	G1	None						SetValIfResultCol	MedDose=25&Medication=6	MedDose is 25 and Med is 6
+								SetValIfResultCol	MedDose=5&Medication=12	MedDose is 5 and Med is 12

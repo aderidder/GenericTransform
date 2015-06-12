@@ -1,0 +1,4 @@
+PersonID	StudySubjectID	weight	OrigWeightEmpty	OrigWeightNotEmpty	OrigWeightGT70	OrigWeightLT70	OrigWeightNotEmptyAndGT70	OrigWeightNotEmptyAndLT70	OrigWeightGT70OrLT70	ResultWeightEmpty	ResultWeightNotEmpty	ResultWeightGT70	ResultWeightLT70	ResultWeightNotEmptyAndGT70	ResultWeightNotEmptyAndLT70	ResultWeightGT70OrLT70
+V-03-P	V-03-P	87.99		NotEmpty	GT70		Not Emtpy & GT70		LT70 or GT70		NotEmpty	GT70		Not Emtpy & GT70		LT70 or GT70
+V-02-A	V-02-A		Empty							Empty						
+V-04-S	V-04-S	60.63		NotEmpty		LT70		Not Emtpy & LT70	LT70 or GT70		NotEmpty		LT70		Not Emtpy & LT70	LT70 or GT70

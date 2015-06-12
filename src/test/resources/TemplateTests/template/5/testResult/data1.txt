@@ -1,0 +1,4 @@
+PersonID	StudySubjectID	OCMedDose_G1	ResultMedDoseEmpty_G1	ResultMedDoseNotEmpty_G1	ResultMedDoseGT10_G1	ResultMedDoseLT10_G1	ResultWeightNotEmptyAndGT70_G1	ResultWeightNotEmptyAndLT70_G1	ResultWeightGT70OrLT70_G1	OrigMedDoseEmpty_G1	OrigMedDoseNotEmpty_G1	OrigMedDoseGT10_G1	OrigMedDoseLT10_G1	OCMedDose_G2	ResultMedDoseEmpty_G2	ResultMedDoseNotEmpty_G2	ResultMedDoseGT10_G2	ResultMedDoseLT10_G2	ResultWeightNotEmptyAndGT70_G2	ResultWeightNotEmptyAndLT70_G2	ResultWeightGT70OrLT70_G2	OrigMedDoseEmpty_G2	OrigMedDoseNotEmpty_G2	OrigMedDoseGT10_G2	OrigMedDoseLT10_G2
+V-03-P	V-03-P	25		NotEmpty	GT10		Not Emtpy & GT10		LT10 or GT10		NotEmpty	GT10			Empty								NotEmpty	GT10	
+V-02-A	V-02-A	5.6		NotEmpty		LT10		Not Emtpy & LT10	LT10 or GT10		NotEmpty		LT10	15		NotEmpty	GT10		Not Emtpy & GT10		LT10 or GT10		NotEmpty		LT10
+V-04-S	V-04-S	5		NotEmpty		LT10		Not Emtpy & LT10	LT10 or GT10		NotEmpty		LT10		Empty								NotEmpty		LT10

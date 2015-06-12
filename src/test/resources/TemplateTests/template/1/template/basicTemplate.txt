@@ -1,0 +1,9 @@
+PersonID	ID	PersonID					
+StudySubjectID	ID	StudySubjectID					
+DateOfDiagnosis	N	CopyDate	visitdate				
+LabRF	N	Copy	RF IgM				
+LabRFPos	N	Translate	Rfpos	Neg	Neg	0	Neg
+				Pos	Pos	1	Pos
+Weigth	N	Copy	gewicht				
+WeightEmpty	N	WhenEmpty	gewicht	-1	No Information		
+Nothing	N	None					

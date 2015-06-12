@@ -1,0 +1,15 @@
+PersonID	ID	PersonID							
+StudySubjectID	ID	StudySubjectID							
+OCMedDose	G1	Copy	MedDose_0						
+ResultMedDoseEmpty	G1	WhenEmpty		Empty				IfResultCol	OCMedDose=
+ResultMedDoseNotEmpty	G1	WhenEmpty		NotEmpty				IfResultCol	OCMedDose!=
+ResultMedDoseGT10	G1	WhenEmpty		GT10				IfResultCol	OCMedDose>10
+ResultMedDoseLT10	G1	WhenEmpty		LT10				IfResultCol	OCMedDose<10
+ResultWeightNotEmptyAndGT70	G1	WhenEmpty		Not Emtpy & GT10				IfResultCol	OCMedDose>10&OCMedDose!=
+ResultWeightNotEmptyAndLT70	G1	WhenEmpty		Not Emtpy & LT10				IfResultCol	OCMedDose!=&OCMedDose<10
+ResultWeightGT70OrLT70	G1	WhenEmpty		LT10 or GT10				IfResultCol	OCMedDose>10
+								IfResultCol	OCMedDose<10
+OrigMedDoseEmpty	G1	WhenEmpty		Empty				IfOrigCol	MedDose_0=
+OrigMedDoseNotEmpty	G1	WhenEmpty		NotEmpty				IfOrigCol	MedDose_0!=
+OrigMedDoseGT10	G1	WhenEmpty		GT10				IfOrigCol	MedDose_0>10
+OrigMedDoseLT10	G1	WhenEmpty		LT10				IfOrigCol	MedDose_0<10

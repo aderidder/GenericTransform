@@ -1,0 +1,17 @@
+GenerateIdentifiers	n
+UsePersonID	y
+PersonIDDef	studienr
+StudySubjectIDDef	studienr
+VisitDateDef	visitdate
+UseDateOfBirth	y
+DateOfBirthDef	geboortedatum
+YearOfBirthOnly	y
+UseGender	y
+GenderDef	geslacht
+GenderMaleCode	0
+GenderFemaleCode	1
+DateFormat	d/M/yyyy
+DataFile	testData2.txt
+IdentifierFile	identifiers1.txt
+CustomIDFile	identifiers2.txt
+CustomRegFile	reg2.txt

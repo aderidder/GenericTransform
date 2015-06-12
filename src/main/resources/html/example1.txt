@@ -1,0 +1,313 @@
+<html>
+   <head>
+      <style>
+         table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>Simple Example</h1>
+      What now follows, is a very simple example.
+      <h2>The Settings File</h2>
+      Let's say we've configured our OpenClinica study in such a way, that we're not interested in gender, but the year of birth is necessary. Furthermore, we'll be generating the identifiers, as we want to create study specific ones. Our settings file looks like this:
+      <table>
+         <tr>
+            <td>GenerateIdentifiers</td>
+            <td>Y</td>
+         </tr>
+         <tr>
+            <td>UsePersonID</td>
+            <td>N</td>
+         </tr>
+         <tr>
+            <td>StudySubjectIDDef</td>
+            <td>studynr</td>
+         </tr>
+         <tr>
+            <td>StudySubjectIDPrefix</td>
+            <td>DemoId-</td>
+         </tr>   
+         <tr>
+            <td>VisitDateDef</td>
+            <td>visitdate</td>
+         </tr>
+         <tr>
+            <td>UseDateOfBirth</td>
+            <td>Y</td>
+         </tr>
+         <tr>
+            <td>DateOfBirthDef</td>
+            <td>dob</td>
+         </tr>
+         <tr>
+            <td>YearOfBirthOnly</td>
+            <td>Y</td>
+         </tr>
+         <tr>
+            <td>UseGender</td>
+            <td>N</td>
+         </tr>
+         <tr>
+            <td>DateFormat</td>
+            <td>dd/M/yyyy</td>
+         </tr>
+      </table>   
+      We place this file in the settings directory as a tab-delimited text file, calling it settings.txt
+      <h2>The Data File</h2>
+      Let's say we have the following data file
+		<table>
+			<tr>
+				<th>studynr</th>
+				<th>gender</th>
+				<th>dob</th>
+				<th>visitdate</th>
+				<th>RF IgM</th>
+				<th>antiCCP</th>
+				<th>Rfpos</th>
+				<th>ACPApos</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>1</td>
+				<td>26/07/1948</td>
+				<td>17/05/2006</td>
+				<td>90</td>
+				<td>204</td>
+				<td>1</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>1</td>
+				<td>26/07/1948</td>
+				<td>17/08/2006</td>
+				<td>5</td>
+				<td>200</td>
+				<td>0</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>0</td>
+				<td>15/02/1950</td>
+				<td>17/05/2006</td>
+				<td>5</td>
+				<td>7</td>
+				<td>0</td>
+				<td>0</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>0</td>
+				<td>15/02/1950</td>
+				<td>17/08/2006</td>
+				<td>1</td>
+				<td>8</td>
+				<td></td>
+				<td>0</td>
+			</tr>
+		</table>
+      As can be seen, this set has two patients and both have two visits. We place this file in the data directory as a tab-delimited text file, calling it data.txt 
+      <h2>The CRF</h2>
+      Let's say we have a CRF which is about laboratory results. The CRF contains four fields. The following are the relevant fields from our CRF:
+		<table>
+			<tr>
+				<th>ITEM_NAME</th>
+				<th>RESPONSE_TYPE</th>
+				<th>RESPONSE_OPTIONS_TEXT</th>
+				<th>RESPONSE_VALUES_OR_CALCULATIONS</th>
+				<th>DATA_TYPE</th>
+			</tr>
+			<tr>
+				<td>RF</td>
+				<td>text</td>
+				<td></td>
+				<td></td>
+				<td>INT</td>
+			</tr>
+			<tr>
+				<td>RFPosNeg</td>
+				<td>single-select</td>
+				<td>None, Positive, Negative, No Information</td>
+				<td>,1, 2, -1</td>
+				<td>INT</td>
+			</tr>
+			<tr>
+				<td>AntiCCP</td>
+				<td>text</td>
+				<td></td>
+				<td></td>
+				<td>INT</td>
+			</tr>
+			<tr>
+				<td>AntiCCPPosNeg</td>
+				<td>single-select</td>
+				<td>None, Positive, Negative, No Information</td>
+				<td>,1, 2, -1</td>
+				<td>INT</td>
+			</tr>
+		</table>
+      <h2>The Template File</h2>
+      Every template requires the StudySubjectID item. Furthermore, after consulting the data's owner, we've learned that in their dataset they're using a 1 as a positive and 0 as a negative. This means we'll have to use a translate action, as in our dataset 2 is negative and 1 is positive. The other labvalues can simply be copied. This results in the following template:
+		<table>
+			<tr>
+				<th>Item_Name</th>
+				<th>Type</th>
+				<th>Action</th>
+				<th>DataColumn</th>
+				<th>Value/TranslateTo</th>
+				<th>Text</th>
+				<th>TranslateFrom</th>
+				<th>Text</th>
+				<th>Check/Postprocess</th>
+				<th>Check</th>
+				<th>New Value</th>
+			</tr>
+			<tr>
+				<td>StudySubjectID</td>
+				<td>id</td>
+				<td>StudySubjectID</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+			</tr>
+			<tr>
+				<td>RF</td>
+				<td>n</td>
+				<td>Copy</td>
+				<td>RF IgM</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+			</tr>
+			<tr>
+				<td>RFPosNeg</td>
+				<td>n</td>
+				<td>Translate</td>
+				<td>Rfpos</td>
+				<td>2</td>
+				<td>Negative</td>
+				<td>0</td>
+				<td>Negative</td>
+            <td></td>
+            <td></td>
+            <td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>1</td>
+				<td>Positive</td>
+				<td>1</td>
+				<td>Positive</td>
+            <td></td>
+            <td></td>
+            <td></td>
+			</tr>
+			<tr>
+				<td>AntiCCP</td>
+				<td>n</td>
+				<td>Copy</td>
+				<td>antiCCP</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+			</tr>
+			<tr>
+				<td>AntiCCPPosNeg</td>
+				<td>n</td>
+				<td>Translate</td>
+				<td>ACPApos</td>
+				<td>2</td>
+				<td>Negative</td>
+				<td>0</td>
+				<td>Negative</td>
+            <td></td>
+            <td></td>
+            <td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>1</td>
+				<td>Positive</td>
+				<td>1</td>
+				<td>Positive</td>
+            <td></td>
+            <td></td>
+            <td></td>
+			</tr>
+		</table>
+      We place this file in the templates directory as a tab-delimited file, calling it simpleTemplate.txt
+   <h2>Putting it all together</h2>
+      With all the files located in the proper directories, we now run the GenericTransform tool. We select the files in the GUI and press the run button. We generate the data for the first visit. Our out directory now contains a file called simpleTemplate_Out_1.txt, which contains the following:
+		<table>
+			<tr>
+				<th>StudySubjectID</th>
+				<th>RF</th>
+				<th>RFPosNeg</th>
+				<th>AntiCCP</th>
+				<th>AntiCCPPosNeg</th>
+			</tr>
+			<tr>
+				<td>DemoId-1</td>
+				<td>90</td>
+				<td>1</td>
+				<td>204</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>DemoId-2</td>
+				<td>5</td>
+				<td>2</td>
+				<td>7</td>
+				<td>2</td>
+			</tr>
+		</table>
+      <br>
+      Furthermore, we have a logfile in our log directory, which in this case is empty, as there were no problems. The base directory contains the registrationFile for the patients:
+		<table>
+			<tr>
+				<th>StudySubjectID</th>
+				<th>Date_of_Birth</th>
+				<th>V1</th>
+				<th>V2</th>
+			</tr>
+			<tr>
+				<td>DemoId-1</td>
+				<td>1948</td>
+				<td>2006-05-17</td>
+				<td>2006-08-17</td>
+			</tr>
+			<tr>
+				<td>DemoId-2</td>
+				<td>1950</td>
+				<td>2006-05-17</td>
+				<td>2006-08-17</td>
+			</tr>
+		</table>
+      <br>
+      The base directory also contains an identifier file, which can be specified in the settings file, to prevent patients from being scheduled multiple times. 
+      <br><br>
+      The data file and the registration file are ready to be used in the OCDataImporter.
+   </body>
+</html>

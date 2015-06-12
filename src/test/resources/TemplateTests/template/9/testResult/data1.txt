@@ -1,0 +1,4 @@
+PersonID	StudySubjectID	DateOfDiagnosis	Medication_G1	MedDate_G1	MedDose_G1	MedDoseEmpty_G1	Nothing_G1	Medication_G2	MedDate_G2	MedDose_G2	MedDoseEmpty_G2	Nothing_G2
+ESRA-55-1	ESRA-55-1_1	2002-04-20	Ibuprofen	2008-10-07	9							
+ESRA-55-2	ESRA-55-2_1	2006-08-17										
+ESRA-55-3	ESRA-55-3_2	2007-03-01	Paracetamol	2009-04-06	6			Ibuprofen	2010-10-10	10		

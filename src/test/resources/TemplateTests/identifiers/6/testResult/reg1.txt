@@ -1,0 +1,3 @@
+StudySubjectID	Date_of_Birth	Gender	V1	V2
+V-04-S	1980-11-23	m	2006-08-29	2006-11-29
+V-02-A	1960-07-26	f	2006-05-17

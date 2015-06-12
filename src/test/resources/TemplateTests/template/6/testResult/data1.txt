@@ -1,0 +1,4 @@
+PersonID	StudySubjectID	Medication_G1	MedDose_G1	MedDose2_G1	MedDose3_G1	MedDose4_G1	MedDoseXor_G1	MedDoseIfResultCol_G1	MedDoseXor2_G1	MedDoseIfResultCol2_G1	Medication_G2	MedDose_G2	MedDose2_G2	MedDose3_G2	MedDose4_G2	MedDoseXor_G2	MedDoseIfResultCol_G2	MedDoseXor2_G2	MedDoseIfResultCol2_G2
+V-03-P	V-03-P	6	25				MedDose2 was 25	MedDose is 25	MedDose3 and MedDose4 were 25	MedDose is 25 and Med is 6	12	15	15	15	15				
+V-02-A	V-02-A	6	5.6	5.6	5.6	5.6						15	15	15	15				
+V-04-S	V-04-S	12	5	5	5	5		MedDose is 5		MedDose is 5 and Med is 12									

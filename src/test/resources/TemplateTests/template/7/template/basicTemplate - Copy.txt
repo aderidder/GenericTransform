@@ -1,0 +1,11 @@
+PersonID	ID	PersonID							
+StudySubjectID	ID	StudySubjectID							
+DateOfDiagnosis	N	CopyDate	visitdate						
+Medication	G1	Translate	"Med0, Med1"	Paracetamol	Paracetamol	6	Paracetamol		
+				Ibuprofen	Ibuprofen	12	Ibuprofen		
+					No Med		No Med		
+MedDate	G1	CopyDate	"MedDate0, MedDate1"					ifResultCol	Medication!=
+MedDose	G1	Copy	"MedDose0, MedDose1"					ifResultCol	Medication!=
+MedDoseEmpty	G1	WhenEmpty	"MedDose0, MedDose1"	No Med Dose Found				ifResultCol	Medication!=
+Today	G1	Today						ifResultCol	Medication!=
+Nothing	G1	None						ifResultCol	Medication!=

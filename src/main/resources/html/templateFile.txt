@@ -1,0 +1,241 @@
+<html>
+   <head>
+      <style>
+         table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>Template File</h1>
+      <h2>Introduction</h2>
+      The template is the heart of the program, describing which actions should be performed on which columns. The Generic Transform has some easy to use actions, but also some more complicated operations available. First, we will describe the expected structure of a template file. Next, we will describe the available actions, followed by the options for pre- and postprocessing. 
+      <h2>General Structure</h2>
+      The template file is a tab-delimited text file. The first row may contain a header, but this is not required. The rest of the rows are template items. The columns are as follows:
+      <table>
+         <tr>
+            <th>Column Name</th>
+            <th>Description</th>
+            <th>Possible Values</th>
+         </tr>
+         <tr>
+            <td>Item Name</td>
+            <td>StudySubectID<br>PersonID<br>Item Name as defined in the CRF</td>
+            <td>Text</td>
+         </tr>
+         <tr>
+            <td>Type</td>
+            <td>What type of item this is</td>
+            <td>ID (for the StudySubjectID and PersonID)<br>N (for normal items)<br>Gx (for repeating group items), where x is a number. All items in one repeating group must have the same number</td>
+         </tr>
+         <tr>
+            <td>Action</td>
+            <td>The action to perform</td>
+            <td>See the Action section for the available actions</td>
+         </tr>
+         <tr>
+            <td>DataColumn</td>
+            <td>The data column in your source data file</td>
+            <td>Free text<br>For a repeating group enter the first item</td>
+         </tr>
+         <tr>
+            <td>Value/TranslateTo</td>
+            <td>The new value or the value to translate to, depends on chosen action</td>
+            <td>Free text</td>
+         </tr>
+         <tr>
+            <td>Text</td>
+            <td>A textual representation of the value</td>
+            <td>Free text</td>
+         </tr>
+         <tr>
+            <td>TranslateFrom</td>
+            <td>The value in the source data to translate from. Only relevant for a Translate action</td>
+            <td>Free text</td>
+         </tr>
+         <tr>
+            <td>Check / Postprocess Name</td>
+            <td>The check or posprocess action to perform</td>
+            <td>See their respective sections</td>
+         </tr>
+         <tr>
+            <td>The check</td>
+            <td>Part of check / postprocess</td>
+            <td>See their respective sections</td>
+         </tr>
+         <tr>
+            <td>Value</td>
+            <td>Part of postprocess</td>
+            <td>See the postprocess section</td>
+         </tr>
+      </table>
+      <h2>Actions</h2>
+      Actions define what action the Generic Transform will perform on the datacolumn. The following actions are available:
+      <table>
+         <tr>
+            <th>Action</th>
+            <th>Description</th>
+            <th>Requires / Does not require</th>
+            <th>Remark</th>
+         </tr>   
+         <tr>
+            <td>CopyDate</td>
+            <td>Copies a value from the datacolumn, expecting the data-format as described in your settingsfile, and converts it to the OpenClinica date format. On error return 1900-01-01</td>
+            <td>Requires: datacolumn</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>Copy</td>
+            <td>Copies the value from the dataColumn</td>
+            <td>Requires: datacolumn</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>None</td>
+            <td>Do nothing for this item</td>
+            <td>Requires: nothing</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>PersonID</td>
+            <td>Special action for the PersonID, ensuring the proper personID is inserted</td>
+            <td>Requires: can only be used if the settings file has UsePerson Y<br>
+                Does not require: datacolumn</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>StudySubjectID</td>
+            <td>Special action for the StudySubjectID, ensuring the proper studySubjectID is inserted</td>
+            <td>Does not require: datacolumn</td>
+            <td>This action is always required!</td>
+         </tr>
+         <tr>
+            <td>Today</td>
+            <td>Set the item's value to today's date</td>
+            <td>Does not require: datacolumn</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>Translate</td>
+            <td>Translate the value specified in the datacolumn from one value to another</td>
+            <td>Requires: datacolumn, translate from, translate to</td>
+            <td>This item can take multiple rows. Also, the translate to column can contain duplicates.</td>
+         </tr>
+         <tr>
+            <td>WhenEmpty</td>
+            <td>This action can be used to set the item's field to a specific default value</td>
+            <td>Required: value Optional: datacolumn</td>
+            <td>If datacolumn is not specified, the field is set to the specified value.<br>
+                If datacolumn is specified, the program checks whether the datacolumn's value is empty. If it is, the value is set to the specified value.<br>
+                This action can span two rows; the first containing when empty value, the second containing the when not empty value. If the second value is not specified, it is assumed to be the empty string.
+            </td>
+         </tr>
+      </table>
+      <h3>Advanced Option: Applying a Pattern</h3>
+      In some cases the source column contains data which you may want to store in multiple columns. For example, consider the case where the data column contains 1x/week, 2x/day, 1x/month, etc. and in your CRF you wish to store this in two separate columns. In order to capture the components, the GenericTransform tool allows you to apply a Java Pattern with one capturing group. For example, to copy just the digit part, we could specify our action as Copy:(\\d+)\\D+.*<br>
+      Check out http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html for more information on how to specify patterns.
+   <h2>Pre-process Actions</h2>
+   The pre-process actions give you more control, telling the Generic Transform tool to execute the actions only if the requirements are met. Pre-process actions require two columns: one specifying the Action and one specifying the check. The following pre-process actions are available:
+      <table>
+         <tr>
+            <th>Action</th>
+            <th>Description</th>
+            <th>Remark</th>
+         </tr>   
+         <tr>
+            <td>IfOrigCol</td>
+            <td>Check whether the source datacolumn(s) specified in the check column meet the requirement(s)</td>
+            <td>Avoid this in repeating groups</td>
+         </tr>   
+         <tr>
+            <td>IfResultCol</td>
+            <td>Check whether the result datacolumn(s) specified in the check column meet the requirement(s)</td>
+            <td>In repeating groups, this checks within the group</td>
+         </tr>   
+      </table>   
+      <h2>Defining the Check</h2>
+      The operators supported for the actual check are: =, !=, &lt;, &gt;. Furthermore, the &amp; is supported, allowing the user to chain multiple checks that have to be met. In case an "or" is required, a new row has to be added. The following examples show some complete pre-process statements.
+      <h3>Exectute action if resultColumn labValue is empty</h3>
+      <table>
+         <tr>
+            <td>IfResultCol</td>
+            <td>labValue=</td>
+         </tr>   
+      </table>   
+      <h3>Exectute action if resultColumn labValue is empty and labTest is ACPA</h3>
+      <table>
+         <tr>
+            <td>IfResultCol</td>
+            <td>labValue=&amp;labTest=ACPA</td>
+         </tr>   
+      </table>   
+      <h3>Exectute action if resultColumn labValue is empty or labTest is ACPA</h3>
+      <table>
+         <tr>
+            <td>IfResultCol</td>
+            <td>labValue=</td>
+         </tr>   
+         <tr>
+            <td></td>
+            <td>labTest=ACPA</td>
+         </tr>   
+      </table>   
+   <h2>Post-process Actions</h2>
+   The post-process actions occur after all actions have been performed. Post-process actions require two or three columns: one specifying the Action, one specifying the check and one specifying a value. The following post-process actions are available:
+      <table>
+         <tr>
+            <th>Action</th>
+            <th>Description</th>
+            <th>Remark</th>
+         </tr>   
+         <tr>
+            <td>RoundValue</td>
+            <td>Rounds the value to the number of digits specified in the third column.</td>
+            <td>Does not use the check column<br>
+                If Pre-process conditions are also specified, these must be met or roundvalue will not execute</td>
+         </tr>   
+         <tr>
+            <td>SetValIfOrigCol</td>
+            <td>Check whether the source datacolumn(s) specified in the check column meet the requirement(s) and if so, set this item's value to the value specified in the third column</td>
+            <td>Avoid this in repeating groups</td>
+         </tr>   
+         <tr>
+            <td>SetValResultCol</td>
+            <td>Check whether the result datacolumn(s) specified in the check column meet the requirement(s) and if so, set this item's value to the value specified in the third column</td>
+            <td>In repeating groups, this checks within the group</td>
+         </tr>   
+         <tr>
+            <td>XorResultCol</td>
+            <td>Check whether the result datacolumn(s) specified in the check column meet the requirement(s) and, if so, clear the item(s) and set this item to the value specified in the third column</td>
+            <td>If Pre-process conditions are also specified, these must be met or XorResultCol will not execute<br>
+         </tr>   
+      </table>   
+      <h2>Defining the Check</h2>
+      The operators supported for the actual check are: =, !=, &lt;, &gt;. Furthermore, the &amp; is supported, allowing the user to chain multiple checks that have to be met. In case an "or" is required, a new row has to be added. The following examples show some complete pre-process statements.
+      <h3>Round value two digits</h3>
+      <table>
+         <tr>
+            <td>RoundValue</td>
+            <td></td>
+            <td>2</td>
+         </tr>   
+      </table>   
+      <h3>Set the value of this item to 10 if the result column labValue is empty and labTest is ACPA</h3>
+      <table>
+         <tr>
+            <td>SetValIfResultCol</td>
+            <td>labValue=&amp;labTest=ACPA</td>
+            <td>10</td>
+         </tr>   
+      </table>   
+      <h3>Set the value of this item to -1 clear the result col labValue if it is NI</h3>
+      <table>
+         <tr>
+            <td>XorResultCol</td>
+            <td>labValue=NI</td>
+            <td>-1</td>
+         </tr>   
+      </table>   
+   </body>
+</html>

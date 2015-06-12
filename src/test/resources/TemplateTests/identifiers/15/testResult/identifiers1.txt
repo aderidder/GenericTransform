@@ -1,0 +1,4 @@
+StudySubjectID	studienr	biovolgnr	geboortedatum	geslacht	visitdate
+ESRA-55-2	V-04-S	1	1980	0	29/08/2006
+ESRA-55-2	V-04-S	2	1980	0	29/11/2006
+ESRA-55-1	V-02-A	1	1960	1	17/05/2006

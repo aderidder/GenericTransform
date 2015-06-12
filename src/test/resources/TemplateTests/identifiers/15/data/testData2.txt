@@ -1,0 +1,7 @@
+studienr	geslacht	geboortedatum	visitdate	biovolgnr	diagnosedatum	RF IgM	antiCCP	Rfpos	ACPApos	lengte	gewicht	Med0	MedDose0	MedEenheid0	FreqType0	FreqAantal0	FreqPer0	Med1	MedDose1	MedEenheid1	FreqType1	FreqAantal1	FreqPer1
+V-02-A	1	26/07/1960	17/08/2006	1							89												
+V-02-A	1	26/07/1960	17/11/2006	2							90.2												
+V-03-P	1	15/05/1954	20/01/2002	1	01/01/2006	5	7	0	0	174	87.99	6	25	mg	spec	1	wk	12	15	mg	spec	1	dag
+V-03-P	1	15/05/1954	20/04/2002	1																			
+V-03-P	1	15/05/1954	20/07/2002	1							87.8												
+V-04-S	0	23/11/1980	01/03/2007	2							65.55	6	6	mg	spec	1	wk	12	10	mg	spec	6	dag

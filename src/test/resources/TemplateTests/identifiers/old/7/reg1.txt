@@ -1,0 +1,4 @@
+StudySubjectID	GeboorteDatum	Geslacht	V1
+V-04-S_1	1980	m	2006-08-29
+V-04-S_2	1980	m	2006-11-29
+V-02-A_1	1960	f	2006-05-17

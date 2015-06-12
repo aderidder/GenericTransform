@@ -1,0 +1,24 @@
+<html>
+   <head>
+   </head>
+   <body>
+      <h1>Running the Generic Transform Tool</h1>
+      Running the tool is easy.<br>
+      First, make sure you have the proper directory structure. It has to look something like this:<br>
+      <img border="0" src="directoryBefore.png"\><br>
+      Now select your basedirectory by clicking on the browse button. A popup will appear, asking you to select your base directory.<br>
+      <img border="0" src="selectBaseDir.png"\><br>
+      After you've selected the directory, click on the next browse button to select your settings file. It will automatically look in the settings directory:<br>
+      <img border="0" src="selectSettings.png"\><br>
+      Next, select your datafile and a template file. All the fields should now have data:<br>
+      <img border="0" src="genericTransform2.png"\><br>
+      Now, click the run button. The Tool will ask which visit it should generate:<br>
+      <img border="0" src="genericTransform3.png"\><br>
+      After clicking Ok, the program will run, hopefully without errors:<br>
+      <img border="0" src="genericTransform4.png"\><br>
+      Your basedirectory now contains an out and a log directory, as well as the registration file and an identifier file:<br>
+      <img border="0" src="directoryAfter.png"\><br>
+
+
+   </body>
+</html>

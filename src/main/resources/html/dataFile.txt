@@ -1,0 +1,105 @@
+<html>
+   <head>
+      <style>
+         table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>Data File</h1>
+      <h2>General Structure</h2>
+      The data has to be provided as a tab-delimited text file. The first row has to contain all the column names of your dataset. As for the data itself, each row has to contain the data for a patient's visit. For example, if you have two patients and both have had three visits, your datafile has to contain six rows. 
+      <h2>Mandatory Columns</h2>
+      There are two mandatory columns, which your data must contain: 
+      <ul>
+         <li>A patient identifier</li>
+         <li>A visit date</li>
+      </ul>
+      The first is required to be able to identify the patients. The second is required, as the program generates data on a visit-basis. 
+      <h2>Example</h2>
+      The following is an example of what a datafile could look like.
+<table>
+			<tr>
+				<th>studynr</th>
+				<th>gender</th>
+				<th>dob</th>
+				<th>visitdate</th>
+				<th>RF IgM</th>
+				<th>antiCCP</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>1</td>
+				<td>26/07/1948</td>
+				<td>17/05/2006</td>
+				<td>90</td>
+				<td>204</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>1</td>
+				<td>26/07/1948</td>
+				<td>17/08/2006</td>
+				<td>5</td>
+				<td>200</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>0</td>
+				<td>15/02/1950</td>
+				<td>17/05/2006</td>
+				<td>5</td>
+				<td>7</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>0</td>
+				<td>15/02/1950</td>
+				<td>17/08/2006</td>
+				<td>1</td>
+				<td>8</td>
+			</tr>
+		</table>
+      Here, studynr will be used as the identifier and visitdate is the visit date. Both will be specified as such in the settings file; see that help topic for more information. 
+
+      <h2>Repeating Groups</h2>
+      Data that should be stored in a repeating group, have a specific column-naming requirement; the repeats have to be numbered with an underscore, followed by a number. Hence, if you have two columns with medication names, the first should e.g. be named MedName_0 and the second MedName_1.
+      <h2>Example</h2>
+      The following is an example of what a datafile with a repeating group with two repeats could look like.
+<table>
+			<tr>
+				<th>studynr</th>
+				<th>gender</th>
+				<th>dob</th>
+				<th>visitdate</th>
+				<th>medname_1</th>
+				<th>startdate_1</th>
+				<th>medname_2</th>
+				<th>startdate_2</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>1</td>
+				<td>26/07/1948</td>
+				<td>17/05/2006</td>
+				<td>adalimumab</td>
+				<td>28/04/2004</td>
+				<td>infliximab</td>
+				<td>05/01/2005</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>0</td>
+				<td>15/02/1950</td>
+				<td>17/05/2006</td>
+				<td>infliximab</td>
+				<td>13/09/2001</td>
+				<td>adalimumab</td>
+				<td>22/01/2004</td>
+			</tr>
+		</table>
+
+   </body>
+</html>

@@ -1,0 +1,4 @@
+PersonID	StudySubjectID	DateOfDiagnosis	Medication_G1	MedDate_G1	MedDose_G1	MedDoseEmpty_G1	Nothing_G1	Medication_G2	MedDate_G2	MedDose_G2	MedDoseEmpty_G2	Nothing_G2
+V-03-P	V-03-P	2002-04-20										
+V-02-A	V-02-A	2006-08-17										
+V-04-S	V-04-S	2006-11-29	Paracetamol	2008-09-07	12			Ibuprofen	2008-10-07	5		

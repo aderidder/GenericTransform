@@ -1,0 +1,16 @@
+GenerateIdentifiers	y
+UsePersonID	n
+StudySubjectIDDef	studienr
+StudySubjectIDPrefix	ERSA-55-
+VisitDateDef	visitdate
+UseDateOfBirth	y
+DateOfBirthDef	geboortedatum
+YearOfBirthOnly	y
+UseGender	y
+GenderDef	geslacht
+GenderMaleCode	0
+GenderFemaleCode	1
+DateFormat	d/M/yyyy
+DataFile	testData.txt
+CustomIDFile	identifiers1.txt
+CustomRegFile	reg1.txt

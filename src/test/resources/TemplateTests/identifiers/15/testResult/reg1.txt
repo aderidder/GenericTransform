@@ -1,0 +1,4 @@
+StudySubjectID	Date_of_Birth	Gender	V1
+ESRA-55-2_1	1980	m	2006-08-29
+ESRA-55-2_2	1980	m	2006-11-29
+ESRA-55-1_1	1960	f	2006-05-17

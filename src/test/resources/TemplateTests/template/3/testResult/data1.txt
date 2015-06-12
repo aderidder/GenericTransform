@@ -1,0 +1,4 @@
+PersonID	StudySubjectID	Weight	WeightEmpty	IsWeightEmpty	WeightEmptyOrNotEmptyAndLT70orNotEmptyAndGT70
+V-03-P	V-03-P	88		Weight is not Empty	Weight is not Empty and GT70
+V-02-A	V-02-A		-1	Weight is Empty	Weight is Empty
+V-04-S	V-04-S	60.6		Weight is not Empty	Weight is not Empty and LT70

@@ -1,0 +1,20 @@
+PersonID	ID	PersonID	PatientID						
+StudySubjectID	ID	StudySubjectID	StudySubjectID						
+DMARD_MedicijnWelke	G3	Translate	"Med0, Med1, Med2, Med3"	11	prednison < 7.5	11	prednison < 7.5		
+				12	prednison 7.5>x<30	12	prednison 7.5>x<30		
+				13	prednison > 30	13	prednison >30		
+				5	sulfasalazine	5	sulfasalazine		
+				6	mtx oraal	6	mtx oraal		
+				1	hydroxychloroquine	1	hydroxychloroquine		
+					Nothing		Nothing		
+DMARD_AnderMedicijn	G3	None							
+DMARD_StartdatumMedicatie	G3	CopyDate	"diagnosedatum, diagnosedatum, diagnosedatum, diagnosedatum"					IfResultCol	DMARD_MedicijnWelke!=
+DMARD_StartdatumMedicatieNULL	G3	None							
+DMARD_StopdatumMedicatie	G3	None							
+DMARD_DoseringHoeveelheid	G3	Copy	"MedDose0, MedDose1, MedDose2, MedDose3"					IfResultCol	DMARD_MedicijnWelke!=
+DMARD_DoseringEenheid	G3	Translate	"MedEenheid0, MedEenheid1, MedEenheid2, MedEenheid3"	1	g	g	g	IfResultCol	DMARD_MedicijnWelke!=
+				2	mg	mg	mg		
+DMARD_Frequentietype	G3	Translate	"FreqType0, FreqType1, FreqType2, FreqType3"	1	specifieke frequentie	spec	specifieke frequentie	IfResultCol	DMARD_MedicijnWelke!=
+DMARD_FrequentieAantal	G3	Copy	"FreqAantal0, FreqAantal1, FreqAantal2, FreqAantal3"					IfResultCol	DMARD_MedicijnWelke!=
+DMARD_DoseringPerEenheidEenheid	G3	Translate	"FreqPer0, FreqPer1, FreqPer2, FreqPer3"	2	dag	dag	dag	IfResultCol	DMARD_MedicijnWelke!=
+				3	week	wk	week		

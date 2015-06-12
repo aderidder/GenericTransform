@@ -1,0 +1,9 @@
+PersonID	ID	PersonID								
+StudySubjectID	ID	StudySubjectID								
+Weight	N	Copy	gewicht					RoundValue		1
+WeightEmpty	N	None						XORResultCol	Weight=	-1
+IsWeightEmpty	N	None						SetValIfResultCol	Weight=	Weight is Empty
+								SetValIfResultCol	Weight!=	Weight is not Empty
+WeightEmptyOrNotEmptyAndLT70orNotEmptyAndGT70	N	None						SetValIfResultCol	Weight!=&Weight<70	Weight is not Empty and LT70
+								SetValIfResultCol	Weight!=&Weight>70	Weight is not Empty and GT70
+								SetValIfResultCol	Weight=	Weight is Empty

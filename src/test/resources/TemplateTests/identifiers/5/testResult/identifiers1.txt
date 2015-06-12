@@ -1,0 +1,4 @@
+StudySubjectID	studienr	geslacht	visitdate
+V-04-S	V-04-S	0	29/08/2006
+V-04-S	V-04-S	0	29/11/2006
+V-02-A	V-02-A	1	17/05/2006

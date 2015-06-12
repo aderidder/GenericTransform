@@ -1,0 +1,19 @@
+PersonID	ID	PersonID							
+StudySubjectID	ID	StudySubjectID							
+weight	N	Copy	gewicht						
+OrigWeightEmpty	N	WhenEmpty		Empty				IfOrigCol	gewicht=
+OrigWeightNotEmpty	N	WhenEmpty		NotEmpty				IfOrigCol	gewicht!=
+OrigWeightGT70	N	WhenEmpty		GT70				IfOrigCol	gewicht>70
+OrigWeightLT70	N	WhenEmpty		LT70				IfOrigCol	gewicht<70
+OrigWeightNotEmptyAndGT70	N	WhenEmpty		Not Emtpy & GT70				IfOrigCol	gewicht>70&gewicht!=
+OrigWeightNotEmptyAndLT70	N	WhenEmpty		Not Emtpy & LT70				IfOrigCol	gewicht!=&gewicht<70
+OrigWeightGT70OrLT70	N	WhenEmpty		LT70 or GT70				IfOrigCol	gewicht>70
+								IfOrigCol	gewicht<70
+ResultWeightEmpty	N	WhenEmpty		Empty				IfResultCol	weight=
+ResultWeightNotEmpty	N	WhenEmpty		NotEmpty				IfResultCol	weight!=
+ResultWeightGT70	N	WhenEmpty		GT70				IfResultCol	weight>70
+ResultWeightLT70	N	WhenEmpty		LT70				IfResultCol	weight<70
+ResultWeightNotEmptyAndGT70	N	WhenEmpty		Not Emtpy & GT70				IfResultCol	weight>70&weight!=
+ResultWeightNotEmptyAndLT70	N	WhenEmpty		Not Emtpy & LT70				IfResultCol	weight!=&weight<70
+ResultWeightGT70OrLT70	N	WhenEmpty		LT70 or GT70				IfResultCol	weight>70
+								IfResultCol	weight<70

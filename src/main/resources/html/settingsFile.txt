@@ -1,0 +1,288 @@
+<html>
+   <head>
+      <style>
+         table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>Settings File</h1>
+      The settings file contains a set of parameters, some required, some optional, for the program. The file has to be a tab-delimited file with the first column containing the setting name and the second column containing the value.
+      <h2>Settings</h2>
+      The program currently supports the following settings: 
+      <table>
+         <tr>
+            <th>Setting</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Description</th>
+            <th>Example</th>
+         </tr>
+         <tr>
+            <td>GENERATEIDENTIFIERS</td>
+            <td>Always</td>
+            <td>Y or N</td>
+            <td>Whether to generate Identfiers</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>USEPERSONID</td>
+            <td>Always</td>
+            <td>Y or N</td>
+            <td>Whether to use a personID</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>PERSONIDDEF</td>
+            <td>Required if USEPERSONID Y</td>
+            <td>Text</td>
+            <td>The column to use for the person Identifiers</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>PERSONIDPREFIX</td>
+            <td>Required if GENERATEIDENTIFIERS Y and USEPERSONID Y</td>
+            <td>Text</td>
+            <td>If generating identifiers the prefix to use for the PersonID</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>PERSONIDEXTEND</td>
+            <td></td>
+            <td></td>
+            <td>Whether to add an _nr to the personID. This is used when a repeatColDef is given</td>
+            <td> SS: ESRA-55-0001_1 --> P: ESRA-55-0001_1 or ESRA-55-0001<br>
+            SS: ESRA-55-0001_2 --> P: ESRA-55-0001_2 or ESRA-55-0001</td>
+         </tr>
+         <tr>
+            <td>STUDYSUBJECTIDDEF</td>
+            <td>Always</td>
+            <td></td>
+            <td>The column to use for the studySubject Identifiers</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>STUDYSUBJECTIDPREFIX</td>
+            <td>Required if GENERATEIDENTIFIERS Y</td>
+            <td>Text</td>
+            <td>If generating identifiers the prefix to use for the SSID</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>VISITDATEDEF</td>
+            <td>Always</td>
+            <td>Text</td>
+            <td>The column to use for the visitDate Identifiers</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>USEDATEOFBIRTH</td>
+            <td>Always</td>
+            <td>Y or N</td>
+            <td>Whether to use date of birth</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>DATEOFBIRTHDEF</td>
+            <td>Required if USEDATEOFBIRTH Y</td>
+            <td>Text</td>
+            <td>The column to use for the dob</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>YEAROFBIRTHONLY</td>
+            <td>Required if USEDATEOFBIRTH Y</td>
+            <td>Y or N</td>
+            <td>Whether the full date may be used as dob or only the year</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>USEGENDER</td>
+            <td>Always</td>
+            <td>Y or N</td>
+            <td>Whether to use Gender or not</td>
+            <td></td>
+            </tr>
+         <tr>
+            <td>GENDERDEF</td>
+            <td>Required if USEGENDER Y</td>
+            <td>Text</td>
+            <td>The column to use for the gender</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>GENDERMALECODE</td>
+            <td>Required if USEGENDER Y</td>
+            <td>Text</td>
+            <td>The code for Male</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>GENDERFEMALECODE</td>
+            <td>Required if USEGENDER Y</td>
+            <td>Text</td>
+            <td>The code for Female</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>REPEATCOLDEF</td>
+            <td></td>
+            <td></td>
+            <td>The column to use for a repeating column (e.g. biological nr)</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>DATEFORMAT</td>
+            <td>Always</td>
+            <td>Date format</td>
+            <td>The date format used in the study</td>
+            <td>yyyy-M-dd, </td>
+         </tr>
+         <tr>
+            <td>IDENTIFIERFILE</td>
+            <td>Optional</td>
+            <td></td>
+            <td>The name of an identifierFile</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>CUSTOMDATAFILE</td>
+            <td>Optional</td>
+            <td></td>
+            <td>The name of a custom output dataFile</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>CUSTOMIDFILE</td>
+            <td>Optional</td>
+            <td></td>
+            <td>The name of a custom output identifierFile</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>CUSTOMREGFILE</td>
+            <td>Optional</td>
+            <td></td>
+            <td>The name of a custom output registrationFile</td>
+            <td></td>
+         </tr>
+      </table>
+      <h3>Date format</h3>
+      Specifying the date format can be confusing. The following characters are generally used:
+      <table>
+         <tr>
+            <th>Letter</th>
+            <th>Date Component</th>
+            <th>Example</th>
+         </tr>
+         <tr>
+            <td>y</td>
+            <td>Year</td>
+            <td>1996; 96</td>
+         </tr>
+         <tr>
+            <td>d</td>
+            <td>Day in month</td>
+            <td>10; 2</td>
+         </tr>
+         <tr>
+            <td>M</td>
+            <td>Month in year</td>
+            <td>July; Jul; 07; 7</td>
+         </tr>
+      </table>
+      These components are generally separated by e.g. a - or a /, e.g. d-M-y, d/M/y. Furthermore, if your data has a very specific format, e.g. year always has four digits, you can specify your year as yyyy, but this is not required. 
+      <h2>Simple Example</h2>
+      The following is an example of what a minimal settings file could look like:
+      <table>
+         <tr>
+            <td>GenerateIdentifiers</td>
+            <td>N</td>
+         </tr>
+         <tr>
+            <td>UsePersonID</td>
+            <td>N</td>
+         </tr>
+         <tr>
+            <td>StudySubjectIDDef</td>
+            <td>subjectNr</td>
+         </tr>
+         <tr>
+            <td>VisitDateDef</td>
+            <td>dateOfVisit</td>
+         </tr>
+         <tr>
+            <td>UseDateOfBirth</td>
+            <td>N</td>
+         </tr>
+         <tr>
+            <td>UseGender</td>
+            <td>N</td>
+         </tr>
+         <tr>
+            <td>DateFormat</td>
+            <td>yyyy-M-dd</td>
+         </tr>
+      </table>   
+
+      <h2>More Complicated Example</h2>
+      The following is a more complicated example, which also includes gender, date of birth and generating studysubject identifiers.
+      <table>
+         <tr>
+            <td>GenerateIdentifiers</td>
+            <td>Y</td>
+         </tr>
+         <tr>
+            <td>UsePersonID</td>
+            <td>N</td>
+         </tr>
+         <tr>
+            <td>StudySubjectIDDef</td>
+            <td>subjectNr</td>
+         </tr>
+         <tr>
+            <td>StudySubjectIDPrefix</td>
+            <td>TR-56-</td>
+         </tr>   
+         <tr>
+            <td>VisitDateDef</td>
+            <td>dateOfVisit</td>
+         </tr>
+         <tr>
+            <td>UseDateOfBirth</td>
+            <td>Y</td>
+         </tr>
+         <tr>
+            <td>DateOfBirthDef</td>
+            <td>DOB</td>
+         </tr>
+         <tr>
+            <td>YearOfBirthOnly</td>
+            <td>Y</td>
+         </tr>
+         <tr>
+            <td>UseGender</td>
+            <td>Y</td>
+         </tr>
+         <tr>
+            <td>GenderDef</td>
+            <td>Sex</td>
+         </tr>
+         <tr>
+            <td>GenderMaleCode</td>
+            <td>1</td>
+         </tr>
+         <tr>
+            <td>GenderFemaleCode</td>
+            <td>2</td>
+         </tr>
+         <tr>
+            <td>DateFormat</td>
+            <td>yyyy-M-dd</td>
+         </tr>
+      </table>   
+
+   </body>
+</html>
