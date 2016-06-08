@@ -85,6 +85,12 @@ public abstract class TemplateItem implements Cloneable {
                 case TRANSLATE:
                     templateItem = new TranslateItem(itemName, groupID);
                     break;
+                case TRANSLATEMULTI:
+                    templateItem = new TranslateItemMulti(itemName, groupID);
+                    break;
+                case TRANSLATECOPY:
+                    templateItem = new TranslateCopyItem(itemName, groupID);
+                    break;
                 case COPY:
                     templateItem = new CopyItem(itemName, groupID);
                     break;

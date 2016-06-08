@@ -1,17 +1,17 @@
 package template.item;
 
+import data.Record;
+import shared.OperatorOperations;
+import shared.Shared;
+import template.TemplateIndex;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
-import shared.OperatorOperations;
-import shared.Shared;
-import data.Record;
-import template.TemplateIndex;
-
-public class TranslateItem extends TemplateItem {
-	public TranslateItem(String itemName, String groupID) {
+public class TranslateItemMulti extends TemplateItem {
+	public TranslateItemMulti(String itemName, String groupID) {
         super(itemName, groupID);
 	}
 
@@ -29,11 +29,10 @@ public class TranslateItem extends TemplateItem {
 		try {
             value = getInputValue(inputRecord);
 
-            // why are we doing this? are we expecting multiple inputvalues in this case?
-//			List<String> splitString = OperatorOperations.splitStatement(value, ",", false);
+            // multi selects
+			List<String> splitString = OperatorOperations.splitStatement(value, ",", false);
 
-//			newValue = splitString.stream().map(this::checkKey).collect(Collectors.joining(", "));
-            newValue = checkKey(value);
+			newValue = splitString.stream().map(this::checkKey).collect(Collectors.joining(", "));
 
             outputRecord.setValue(getUID(), newValue);
 			log.log(Level.FINE, "TranslateItem Action: From {0} to {1}", new Object[]{value, newValue});

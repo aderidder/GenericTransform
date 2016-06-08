@@ -16,6 +16,8 @@ public enum ActionType {
     NONE,
     STUDYSUBJECTID,
 	TRANSLATE,
+    TRANSLATECOPY,
+    TRANSLATEMULTI,
 	TODAY,
     WHENEMPTY;
 

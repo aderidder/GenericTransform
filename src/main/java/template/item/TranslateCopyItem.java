@@ -1,23 +1,19 @@
 package template.item;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.stream.Collectors;
-
-import shared.OperatorOperations;
-import shared.Shared;
 import data.Record;
+import shared.Shared;
 import template.TemplateIndex;
 
-public class TranslateItem extends TemplateItem {
-	public TranslateItem(String itemName, String groupID) {
+import java.util.HashMap;
+import java.util.logging.Level;
+
+public class TranslateCopyItem extends TemplateItem {
+	public TranslateCopyItem(String itemName, String groupID) {
         super(itemName, groupID);
 	}
 
     private String checkKey(String key){
         if (!translateMap.containsKey(key)) {
-            log.log(Level.SEVERE, "TranslateItem item: {0}, missing key {1}", new Object[]{itemName, key});
             return null;
         }
         return translateMap.get(key);
@@ -28,12 +24,10 @@ public class TranslateItem extends TemplateItem {
 		String value, newValue;
 		try {
             value = getInputValue(inputRecord);
-
-            // why are we doing this? are we expecting multiple inputvalues in this case?
-//			List<String> splitString = OperatorOperations.splitStatement(value, ",", false);
-
-//			newValue = splitString.stream().map(this::checkKey).collect(Collectors.joining(", "));
+			// first attempt translate
             newValue = checkKey(value);
+			// if fails, copy instead
+			if(newValue==null) newValue = value;
 
             outputRecord.setValue(getUID(), newValue);
 			log.log(Level.FINE, "TranslateItem Action: From {0} to {1}", new Object[]{value, newValue});

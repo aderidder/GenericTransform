@@ -4,6 +4,7 @@ package shared;
 // SharedFileOperations.java
 // Class for file operations
 
+import org.mozilla.universalchardet.UniversalDetector;
 import ui.gui.GenericTransformGUI;
 
 import javax.swing.*;
@@ -54,7 +55,10 @@ public class FileOperations{
 	public static BufferedReader openFileReader(String fileName){
 		BufferedReader in = null;
 		try{
-			in = new BufferedReader(new FileReader(fileName));
+            // try to detect encoding of the file. If not detected use the default UTF-8
+            String encoding = DetectEncoding.detectEncoding(fileName);
+            if(encoding==null) encoding = encodingDefault;
+            in = new BufferedReader(new InputStreamReader(new FileInputStream(new File(fileName)),encoding));
 		} catch (Exception e){
 			System.out.println("Error opening file "+fileName+newLine+"Error is: "+e.toString());
 		}
@@ -69,8 +73,8 @@ public class FileOperations{
 	public static BufferedWriter openFileWriter(String fileName, Boolean append){
 		BufferedWriter out = null;
 		try {
-			//Construct the BufferedWriter object
-			out = new BufferedWriter(new FileWriter(fileName, append));
+            //Construct the BufferedWriter object
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName, append), encodingDefault));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -130,6 +134,25 @@ public class FileOperations{
 		FileOperations.logArea = logArea;
 	}
 
+    private static final String encodingDefault = "UTF-8";
 	private static final String newLine = System.lineSeparator();
 	private static JTextArea logArea;
+}
+
+class DetectEncoding{
+    static String detectEncoding(String fileName) throws IOException{
+        byte[] buf = new byte[4096];
+        FileInputStream fis = new FileInputStream(fileName);
+
+        UniversalDetector detector = new UniversalDetector(null);
+
+        int nread;
+        while ((nread = fis.read(buf)) > 0 && !detector.isDone()) {
+            detector.handleData(buf, 0, nread);
+        }
+
+        detector.dataEnd();
+
+        return detector.getDetectedCharset();
+    }
 }

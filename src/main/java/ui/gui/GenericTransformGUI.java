@@ -212,8 +212,7 @@ public class GenericTransformGUI extends JPanel implements ActionListener{
                 try{
                     String visitNr = PopUps.visitNrPopup();
                     if(visitNr!=null) {
-                        Logging.addLogFileHandler(baseDir);
-//                        runTransform(baseDir, settingsFile, templateFile, dataFile, visitNr);
+//                        Logging.addLogFileHandler(baseDir);
                         new TransformWorker(logArea, baseDir, settingsFile, templateFile, dataFile, visitNr).execute();
                     }
 
@@ -227,8 +226,6 @@ public class GenericTransformGUI extends JPanel implements ActionListener{
             else{
                 log.log(Level.SEVERE, "Please specify files and provide a proper visitNr");
             }
-
-            Logging.removeLogFileHandler();
         }
 
         // show help
@@ -361,9 +358,11 @@ class TransformWorker extends SwingWorker<Integer, String> {
 
     @Override
     protected Integer doInBackground() throws Exception {
+        Logging.addLogFileHandler(baseDir);
         logArea.append("Running GenericTransform..." + newline);
         runTransform();
         logArea.append("Done!" + newline);
+        Logging.removeLogFileHandler();
         logArea.setCaretPosition(logArea.getDocument().getLength());
         return 1;
     }
