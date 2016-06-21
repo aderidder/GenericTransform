@@ -79,6 +79,9 @@ public abstract class TemplateItem implements Cloneable {
                 case STUDYSUBJECTID:
                     templateItem = new StudySubjectIDItem(itemName, groupID);
                     break;
+                case EVENTNR:
+                    templateItem = new EventNrItem(itemName, groupID);
+                    break;
                 case TODAY:
                     templateItem = new TodayItem(itemName, groupID);
                     break;

@@ -55,10 +55,10 @@ public class FileOperations{
 	public static BufferedReader openFileReader(String fileName){
 		BufferedReader in = null;
 		try{
-            // try to detect encoding of the file. If not detected use the default UTF-8
-            String encoding = DetectEncoding.detectEncoding(fileName);
-            if(encoding==null) encoding = encodingDefault;
-            in = new BufferedReader(new InputStreamReader(new FileInputStream(new File(fileName)),encoding));
+            // try to detect charset of the file. If not detected use the default UTF-8
+            String charset = DetectCharset.detectCharset(fileName);
+            if(charset==null) charset = charsetDefaultIn;
+            in = new BufferedReader(new InputStreamReader(new FileInputStream(new File(fileName)),charset));
 		} catch (Exception e){
 			System.out.println("Error opening file "+fileName+newLine+"Error is: "+e.toString());
 		}
@@ -74,7 +74,7 @@ public class FileOperations{
 		BufferedWriter out = null;
 		try {
             //Construct the BufferedWriter object
-            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName, append), encodingDefault));
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName, append), charsetDefaultOut));
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -116,8 +116,6 @@ public class FileOperations{
 	
 	public static synchronized <T> void write(BufferedWriter out, T line){
 		try{
-//			if(Shared.getDebugLevel()>debugLevel) System.out.println(line.toString());
-
 			out.write(line.toString());
 			out.flush();
 		} catch (Exception e) {
@@ -125,22 +123,18 @@ public class FileOperations{
 		}
 	}
 
-//	public static boolean fileExists(String fileName){
-//		File file = new File(fileName);
-//		return file.exists();
-//	}
-
 	public static void setLogArea(JTextArea logArea){
 		FileOperations.logArea = logArea;
 	}
 
-    private static final String encodingDefault = "UTF-8";
+    private static final String charsetDefaultIn = "UTF-8";
+	private static final String charsetDefaultOut = "windows-1252";
 	private static final String newLine = System.lineSeparator();
 	private static JTextArea logArea;
 }
 
-class DetectEncoding{
-    static String detectEncoding(String fileName) throws IOException{
+class DetectCharset {
+    static String detectCharset(String fileName) throws IOException{
         byte[] buf = new byte[4096];
         FileInputStream fis = new FileInputStream(fileName);
 

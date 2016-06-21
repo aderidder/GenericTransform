@@ -25,6 +25,10 @@ public class Settings {
 		this.visitNr = visitNr;
 	}
 
+	public int getVisitNr(){
+		return visitNr;
+	}
+
 	private void generateIDHeader(){
 		idHeader = ocStudySubjectIDDef+"\t"+ identifierSettings.getStudySubjectIDDef()+"\t";
 		if(!identifierSettings.getRepeatColDef().equals("")) idHeader+= identifierSettings.getRepeatColDef()+"\t";

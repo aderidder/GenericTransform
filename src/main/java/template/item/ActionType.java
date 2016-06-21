@@ -12,8 +12,9 @@ import java.util.stream.Collectors;
 public enum ActionType {
     COPY,
     COPYDATE,
-	PERSONID,
+    EVENTNR,
     NONE,
+    PERSONID,
     STUDYSUBJECTID,
 	TRANSLATE,
     TRANSLATECOPY,
