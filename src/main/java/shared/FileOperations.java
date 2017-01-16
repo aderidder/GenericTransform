@@ -104,8 +104,6 @@ public class FileOperations{
 
 	public static synchronized <T> void writeLine(BufferedWriter out, T line){
 		try{
-//			if(Shared.getDebugLevel()>debugLevel) System.out.println(line.toString());
-			
 			out.write(line.toString());
 			out.newLine();
 			out.flush();

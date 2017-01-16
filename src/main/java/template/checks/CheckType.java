@@ -24,7 +24,9 @@ public enum CheckType {
 		// first check whether the fieldTypeString is a CheckType
 		if(!containsFieldType(fieldTypeString)){
 			// it it isn't check whether it is a PostProcessType; if it isn't generate a SEVERE log entry
-            if(!PostProcessType.containsFieldType(fieldTypeString)) log.log( Level.SEVERE, "getFieldType: unsupported type: {0}", fieldTypeString);
+            if(!PostProcessType.containsFieldType(fieldTypeString)) {
+				log.log( Level.SEVERE, "Issue creating a CheckType. The provided type {0} doesn't exist", fieldTypeString);
+			}
             return null;
         }
 		return CheckType.valueOf(fieldTypeString);

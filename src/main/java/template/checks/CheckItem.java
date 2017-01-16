@@ -1,6 +1,7 @@
 package template.checks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,18 +27,33 @@ public class CheckItem {
         if (splitLine.length < index + 1) return null;
         // retrieve the string and check whether it is a checkTypeString
         String checkTypeString = splitLine[index];
+        if(checkTypeString.equalsIgnoreCase("")){
+            log.log(Level.SEVERE, "There was an issue creating a checkItem: the type is not defined, but an " +
+                    "argument/value was provided. \n\tLine with error: {0}",
+                    Arrays.asList(splitLine).stream().collect(Collectors.joining(" ")));
+            return null;
+        }
+
         CheckType checkType = CheckType.getFieldType(checkTypeString.toUpperCase());
-        if (checkType == null) return null;
+        if (checkType == null){
+            return null;
+        }
 
         // check whether too many arguments were provided
-        if(splitLine.length>index+2) log.log(Level.WARNING, "Warning for item: {0} - {1} requires 2 fields: the Name and the Check. Everything following will be ignored.", new Object[]{splitLine[TemplateIndex.itemNameIndex], checkTypeString});
+        if(splitLine.length>index+2){
+            log.log(Level.WARNING, "Warning for item: {0} - {1} requires 2 fields: the Name and the Check. " +
+                    "Everything following will be ignored.",
+                    new Object[]{splitLine[TemplateIndex.itemNameIndex], checkTypeString});
+        }
 
         return new CheckItem(checkType, splitLine[index + 1]);
 	}
 
     public boolean conditionMet(Record inputRecord, Record outputRecord, int instanceNr){
         for(SingleCheck singleCheck:checks){
-            if(!singleCheck.conditionMet(inputRecord, outputRecord, instanceNr)) return false;
+            if(!singleCheck.conditionMet(inputRecord, outputRecord, instanceNr)) {
+                return false;
+            }
         }
         return true;
     }
@@ -52,7 +68,9 @@ public class CheckItem {
         List<String> splitFormula = OperatorOperations.splitStatement(Shared.cleanString(formula), OperatorOperations.getAndOperator(), false);
         for(String part:splitFormula){
             operator = OperatorOperations.getOperator(part);
-            if(operator.equalsIgnoreCase("")) throw new Exception("Problem finding an operator in the formula: "+formula);
+            if(operator.equalsIgnoreCase("")) {
+                throw new Exception("Problem finding an operator in the formula: "+formula);
+            }
             aList = OperatorOperations.splitStatement(part, operator);
             checks.add(createCheckItem(aList.get(0), aList.get(1), operator));
         }
