@@ -9,7 +9,6 @@ public class CopyItem extends TemplateItem {
 
 	public CopyItem(String itemName, String groupID) {
 		super(itemName, groupID);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override protected void addFirstLine(String[] splitLine) {
@@ -21,8 +20,7 @@ public class CopyItem extends TemplateItem {
 	}
 
 	@Override public void addLineItem(String [] templateLine) {
-		// TODO Auto-generated method stub
-		
+		// nothing
 	}
 
 	@Override public void performItemAction(Record inputRecord, Record outputRecord){

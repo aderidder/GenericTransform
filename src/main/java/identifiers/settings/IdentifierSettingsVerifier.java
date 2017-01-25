@@ -15,6 +15,9 @@ class IdentifierSettingsVerifier {
     private static String checkCompulsoryFields(Settings settings){
         String message="";
 
+        if(settings.getStudyName().equalsIgnoreCase("")){
+            message+=IdentifierSettingsErrors.COMPULSORY_STUDYNAME.getErrorMessage();
+        }
         if(settings.getGenerateIdentifiers().equalsIgnoreCase("")){
             message+=IdentifierSettingsErrors.COMPULSORY_GENERATEIDENTIFIERS.getErrorMessage();
         }
@@ -193,6 +196,7 @@ enum IdentifierSettingsErrors {
     COMPULSORY_USEDATEOFBIRTH("Compulsory setting missing: please specify UseDateOfBirth (y/n) in your settings"),
     COMPULSORY_USEGENDER("Compulsory setting missing: please specify UseGender (y/n) in your settings"),
     COMPULSORY_DATEFORMAT("Compulsory setting missing: please specify a DateFormat in your settings"),
+    COMPULSORY_STUDYNAME("Compulsory setting missing: please specify a StudyName in your settings"),
 //    COMPULSORY_DATAFILE("Compulsory setting missing: please specify a DateFile in your settings"),
 
     GENDER_NOMALECODE("When UseGender='y', please specify GenderMaleCode in your settings. This is compulsory."),

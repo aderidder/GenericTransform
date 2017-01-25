@@ -14,6 +14,10 @@
       Let's say we've configured our OpenClinica study in such a way, that we're not interested in gender, but the year of birth is necessary. Furthermore, we'll be generating the identifiers, as we want to create study specific ones. Our settings file looks like this:
       <table>
          <tr>
+            <td>StudyName</td>
+            <td>CTMM-ESRA</td>
+         </tr>
+         <tr>
             <td>GenerateIdentifiers</td>
             <td>Y</td>
          </tr>
@@ -166,30 +170,56 @@
 				<th>New Value</th>
 			</tr>
 			<tr>
+				<td>CRFName</td>
+				<td>N</td>
+				<td>CRFName</td>
+                <td></td>
+                <td>MySimpleCRF</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+			</tr>
+			<tr>
+				<td>CRFVersion</td>
+				<td>N</td>
+				<td>CRFVersion</td>
+                <td></td>
+                <td>V1.0</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+			</tr>
+			<tr>
 				<td>StudySubjectID</td>
 				<td>id</td>
 				<td>StudySubjectID</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-			</tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+   			</tr>
 			<tr>
 				<td>RF</td>
 				<td>n</td>
 				<td>Copy</td>
 				<td>RF IgM</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
 			</tr>
 			<tr>
 				<td>RFPosNeg</td>
@@ -200,9 +230,9 @@
 				<td>Negative</td>
 				<td>0</td>
 				<td>Negative</td>
-            <td></td>
-            <td></td>
-            <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -213,22 +243,22 @@
 				<td>Positive</td>
 				<td>1</td>
 				<td>Positive</td>
-            <td></td>
-            <td></td>
-            <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
 			</tr>
 			<tr>
 				<td>AntiCCP</td>
 				<td>n</td>
 				<td>Copy</td>
 				<td>antiCCP</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
 			</tr>
 			<tr>
 				<td>AntiCCPPosNeg</td>
@@ -239,9 +269,9 @@
 				<td>Negative</td>
 				<td>0</td>
 				<td>Negative</td>
-            <td></td>
-            <td></td>
-            <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -252,9 +282,9 @@
 				<td>Positive</td>
 				<td>1</td>
 				<td>Positive</td>
-            <td></td>
-            <td></td>
-            <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
 			</tr>
 		</table>
       We place this file in the templates directory as a tab-delimited file, calling it simpleTemplate.txt
@@ -262,6 +292,12 @@
       With all the files located in the proper directories, we now run the GenericTransform tool. We select the files in the GUI and press the run button. We generate the data for the first visit. Our out directory now contains a file called simpleTemplate_Out_1.txt, which contains the following:
 		<table>
 			<tr>
+			    <th>Study</th>
+			    <th>Site</th>
+			    <th>EventName</th>
+			    <th>EventRepeat</th>
+			    <th>CRFName</th>
+			    <th>CRFVersion</th>
 				<th>StudySubjectID</th>
 				<th>RF</th>
 				<th>RFPosNeg</th>
@@ -269,6 +305,12 @@
 				<th>AntiCCPPosNeg</th>
 			</tr>
 			<tr>
+			    <td>CTMM-ESRA</td>
+			    <td></td>
+			    <td>Visit 1</td>
+			    <td>1</td>
+			    <td>MySimpleCRF</td>
+			    <td>V1.0</td>
 				<td>DemoId-1</td>
 				<td>90</td>
 				<td>1</td>
@@ -276,7 +318,13 @@
 				<td>1</td>
 			</tr>
 			<tr>
-				<td>DemoId-2</td>
+			    <td>CTMM-ESRA</td>
+			    <td></td>
+			    <td>Visit 1</td>
+			    <td>1</td>
+			    <td>MySimpleCRF</td>
+			    <td>V1.0</td>
+                <td>DemoId-2</td>
 				<td>5</td>
 				<td>2</td>
 				<td>7</td>
@@ -284,30 +332,33 @@
 			</tr>
 		</table>
       <br>
-      Furthermore, we have a logfile in our log directory, which in this case is empty, as there were no problems. The base directory contains the registrationFile for the patients:
+      Furthermore, we have a logfile in our log directory, which in this case is empty, as there were no problems. The base directory contains the ocduSubjectRegistrationFile for the patients:
 		<table>
 			<tr>
 				<th>StudySubjectID</th>
 				<th>Date_of_Birth</th>
-				<th>V1</th>
-				<th>V2</th>
+				<th>Date of Enrollment</th>
+				<th>Site (optional)</th>
+				<th>Study</th>
 			</tr>
 			<tr>
 				<td>DemoId-1</td>
 				<td>1948</td>
 				<td>2006-05-17</td>
-				<td>2006-08-17</td>
+				<td></td>
+				<td>CTMM-ESRA</td>
 			</tr>
 			<tr>
 				<td>DemoId-2</td>
 				<td>1950</td>
 				<td>2006-05-17</td>
-				<td>2006-08-17</td>
+				<td></td>
+				<td>CTMM-ESRA</td>
 			</tr>
 		</table>
       <br>
       The base directory also contains an identifier file, which can be specified in the settings file, to prevent patients from being scheduled multiple times. 
       <br><br>
-      The data file and the registration file are ready to be used in the OCDataImporter.
+      The data file and the registration files are ready to be used in the OCDU.
    </body>
 </html>

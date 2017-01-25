@@ -111,6 +111,7 @@ class Help extends JPanel implements ListSelectionListener {
 
 		//Display the window.
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 

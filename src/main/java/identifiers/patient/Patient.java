@@ -18,12 +18,15 @@ public abstract class Patient {
 
     // Abstract classes which any implementing class require
     public abstract String generateIDRegistration();
-	public abstract String generateOCPatientEventRegistration(int maxNrVisits);
+//	public abstract String generateOCPatientEventRegistration(int maxNrVisits);
 	public abstract void addVisit(Record record, boolean idFileSource);
 	public abstract int getPatientMaxVisits();
 	public abstract boolean isVisitNr(Record record, int visitNr);
 	public abstract String getStudySubjectID(Record record);
 	public abstract String getPersonID(Record record);
+
+	public abstract String generateOCDUSubjectRegistration();
+    public abstract String generateOCDUEventRegistration();
 
 
     // generate a patientID
@@ -45,48 +48,108 @@ public abstract class Patient {
 
     // SimplePatients don't have a suffix.
     // call the createOCRegLine with ""
-    final String createOCRegLine(List<Visit> visitList, int maxNrVisits){
-        return createOCRegLine(visitList, "", maxNrVisits);
-    }
-
-	final String addEmptyVisits(List<Visit> visitList, int maxNrVisits){
-		int patientNrVisits = visitList.size();
-		String returnString="";
-		for(int i = patientNrVisits; i<maxNrVisits; i++){
-			returnString+="\t";
-		}
-		return returnString;
-	}
+//    final String createOCRegLine(List<Visit> visitList, int maxNrVisits){
+//        return createOCRegLine(visitList, "", maxNrVisits);
+//    }
+//
+//	final String addEmptyVisits(List<Visit> visitList, int maxNrVisits){
+//		int patientNrVisits = visitList.size();
+//		String returnString="";
+//		for(int i = patientNrVisits; i<maxNrVisits; i++){
+//			returnString+="\t";
+//		}
+//		return returnString;
+//	}
     // create a line for the registration file
     // this is based on the visitList (as each visit needs to be in the registration file)
     // and on the suffix
-    final String createOCRegLine(List<Visit> visitList, String suffix, int maxNrVisits){
-		// turn the visitList into a String
-		String visits = visitList.stream().map(Visit::getRegistrationDate).collect(Collectors.joining("\t"));
-		String regLine="";
-		// check whether there are visits
-		if(!visits.trim().equals("")){
-			// add personID information to the line if necessary
-			if(settings.usePersonID()){
+//    final String createOCRegLine(List<Visit> visitList, String suffix, int maxNrVisits){
+//		// turn the visitList into a String
+//		String visits = visitList.stream().map(Visit::getRegistrationDate).collect(Collectors.joining("\t"));
+//		String regLine="";
+//		// check whether there are visits
+//		if(!visits.trim().equals("")){
+//			// add personID information to the line if necessary
+//			if(settings.usePersonID()){
+//                if(settings.extendPersonID()) regLine=ocPersonID+suffix+"\t";
+//                else regLine=ocPersonID+"\t";
+//            }
+//			regLine+=ocStudySubjectID+suffix;
+//
+//			// add dob information to the line if necessary
+//			if(settings.useDateOfBirth()) {
+//				if(settings.useYearOfBirthOnly()) regLine += "\t" + DateOperations.toOCDate(dbDateOfBirth).getYear();
+//				else regLine += "\t" + DateOperations.toOCDate(dbDateOfBirth);
+//			}
+//
+//			// add gender information to the line if necessary
+//			if(settings.useGender()){
+//				regLine += "\t"+ settings.translateGender(dbGender);
+//			}
+//			regLine+="\t"+visits;
+//		}
+//		return regLine+addEmptyVisits(visitList, maxNrVisits);
+//	}
+
+
+    // SimplePatients don't have a suffix.
+    // call the createOCRegLine with ""
+    final String createOCDUSubjectRegistrationLine(List<Visit> visitList){
+        return createOCDUSubjectRegistrationLine(visitList, "");
+    }
+
+    // PersonID; Study Subject ID; Gender; Date of Enrollment; Site (optional); Study
+    final String createOCDUSubjectRegistrationLine(List<Visit> visitList, String suffix){
+        String regLine="";
+        // check whether there are visits
+        if(visitList.size()>0){
+            // add personID information to the line if necessary
+            if(settings.usePersonID()){
                 if(settings.extendPersonID()) regLine=ocPersonID+suffix+"\t";
                 else regLine=ocPersonID+"\t";
             }
-			regLine+=ocStudySubjectID+suffix;
+            regLine+=ocStudySubjectID+suffix;
 
-			// add dob information to the line if necessary
-			if(settings.useDateOfBirth()) {
-				if(settings.useYearOfBirthOnly()) regLine += "\t" + DateOperations.toOCDate(dbDateOfBirth).getYear();
-				else regLine += "\t" + DateOperations.toOCDate(dbDateOfBirth);
-			}
+            // add gender information to the line if necessary
+            if(settings.useGender()){
+                regLine += "\t"+ settings.translateGender(dbGender);
+            }
 
-			// add gender information to the line if necessary
-			if(settings.useGender()){
-				regLine += "\t"+ settings.translateGender(dbGender);
-			}
-			regLine+="\t"+visits;
-		}
-		return regLine+addEmptyVisits(visitList, maxNrVisits);
-	}
+            // add dob information to the line if necessary
+            if(settings.useDateOfBirth()) {
+                if(settings.useYearOfBirthOnly()) regLine += "\t" + DateOperations.toOCDate(dbDateOfBirth).getYear();
+                else regLine += "\t" + DateOperations.toOCDate(dbDateOfBirth);
+            }
+
+            // use first visit as enrollment date
+            regLine+="\t"+visitList.get(0).getRegistrationDate();
+
+            regLine += "\t"+settings.getSiteName()+"\t"+settings.getStudyName();
+        }
+        return regLine;
+    }
+
+    final String createOCDUEventRegistrationLine(List<Visit> visitList){
+        return createOCDUEventRegistrationLine(visitList, "");
+    }
+
+    // Study Subject ID; Event Name; Start Date; Site; Location; Study; Repeat Number
+    final String createOCDUEventRegistrationLine(List<Visit> visitList, String suffix){
+        StringBuffer regLine=new StringBuffer();
+        for(int i=0; i<visitList.size(); i++){
+            Visit visit = visitList.get(i);
+            regLine.append(ocStudySubjectID).append(suffix).append("\t");
+            regLine.append(settings.getVisitName()).append("\t");
+            regLine.append(visit.getRegistrationDate()).append("\t");
+            regLine.append(settings.getSiteName()).append("\t");
+            regLine.append("\t"); //location
+            regLine.append(settings.getStudyName()).append("\t");
+            regLine.append(i+1).append("\n");
+        }
+        String line = regLine.toString();
+        // line is empty return empty string otherwise remove the last carriage return
+        return line.length()==0?"":line.substring(0, line.length()-1);
+    }
 
     final String createIDRegLine(List<Visit> visitList, String repString){
 		String dbIds = dbPatientID.stream().collect(Collectors.joining("\t"));

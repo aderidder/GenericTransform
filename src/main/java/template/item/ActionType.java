@@ -10,9 +10,10 @@ import java.util.stream.Collectors;
 
 // currently supported actions
 public enum ActionType {
+    CRFNAME,
+    CRFVERSION,
     COPY,
     COPYDATE,
-    EVENTNR,
     NONE,
     PERSONID,
     STUDYSUBJECTID,

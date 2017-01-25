@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public enum SettingType {
+	STUDYNAME,
+    SITENAME,
     GENERATEIDENTIFIERS,    // Whether to generate Identfiers
 	USEPERSONID,            //
 	PERSONIDDEF,            // The column to use for the person Identifiers

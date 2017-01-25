@@ -18,7 +18,9 @@ public class Settings {
 		fileSettings = new FileSettings(baseDir, settingsFile, dataFile);
 		readSettingsFile();
 		generateIDHeader();
-		generateRegistrationHeader();
+        generateOCDUSubjectRegistrationHeader();
+        generateOCDUEventRegistrationHeader();
+//		generateRegistrationHeader();
 	}
 
 	public void setVisitNr(int visitNr){
@@ -28,6 +30,14 @@ public class Settings {
 	public int getVisitNr(){
 		return visitNr;
 	}
+
+    public String getVisitName(){
+        return visitName;
+    }
+
+    public void setVisitName(String visitName){
+        this.visitName = visitName;
+    }
 
 	private void generateIDHeader(){
 		idHeader = ocStudySubjectIDDef+"\t"+ identifierSettings.getStudySubjectIDDef()+"\t";
@@ -39,16 +49,36 @@ public class Settings {
 		if(usePersonID()) idHeader = ocPersonIDDef+"\t"+idHeader;
 	}
 
-	private void generateRegistrationHeader(){
-		registrationHeader = ocStudySubjectIDDef;
+//	private void generateRegistrationHeader(){
+//		registrationHeader = ocStudySubjectIDDef;
 //		if(useDateOfBirth()) registrationHeader+="\t"+ocDOBDef;
 //		if(useGender()) registrationHeader+="\t"+ocGenderDef;
-		if(useDateOfBirth()) registrationHeader+="\t"+ocDOBDef;
-		if(useGender()) registrationHeader+="\t"+ocGenderDef;
-		if(usePersonID()) registrationHeader = ocPersonIDDef+"\t"+registrationHeader;
-	}
+//		if(usePersonID()) registrationHeader = ocPersonIDDef+"\t"+registrationHeader;
+//	}
 
-	private void readSettingsFile(){
+    // PersonID; Study Subject ID; Gender; Date of Enrollment; Site (optional); Study
+    private void generateOCDUSubjectRegistrationHeader(){
+        ocduSubjectRegistrationHeader = ocStudySubjectIDDef;
+        if(useGender()) ocduSubjectRegistrationHeader+="\t"+ocGenderDef;
+        if(useDateOfBirth()) ocduSubjectRegistrationHeader+="\t"+ocDOBDef;
+        ocduSubjectRegistrationHeader+="\t"+ocEnrollmentDef;
+        ocduSubjectRegistrationHeader+="\t"+ocSiteDef;
+        ocduSubjectRegistrationHeader+="\t"+ocStudyNameDef;
+        if(usePersonID()) ocduSubjectRegistrationHeader = ocPersonIDDef+"\t"+ocduSubjectRegistrationHeader;
+    }
+
+    // Study Subject ID; Event Name; Start Date; Site; Location; Study; Repeat Number
+    private void generateOCDUEventRegistrationHeader(){
+        ocduEventRegistrationHeader = ocStudySubjectIDDef;
+        ocduEventRegistrationHeader+="\t"+ocEventNameDef;
+        ocduEventRegistrationHeader+="\t"+ocStartDateDef;
+        ocduEventRegistrationHeader+="\t"+ocSiteDef2;
+        ocduEventRegistrationHeader+="\t"+ocLocationDef;
+        ocduEventRegistrationHeader+="\t"+ocStudyDef;
+        ocduEventRegistrationHeader+="\t"+ocRepeatNrDef;
+    }
+
+    private void readSettingsFile(){
 		String line="";
 		String [] splitLine;
 		BufferedReader bufferedReader = FileOperations.openFileReader(fileSettings.getFullSettingsDir()+fileSettings.getSettingsFile());
@@ -75,6 +105,8 @@ public class Settings {
 	private void setSetting(String setting, String value){
 		SettingType settingType = SettingType.getFieldType(setting.toUpperCase());
 		switch (settingType){
+            case STUDYNAME: this.studyName = value; break;
+            case SITENAME: this.siteName = value; break;
 			case GENERATEIDENTIFIERS: identifierSettings.setGenerateIdentifiers(value); break;
 			case USEPERSONID: identifierSettings.setUsePersonID(value); break;
 			case PERSONIDDEF: identifierSettings.setPersonIDDef(value); break;
@@ -101,6 +133,14 @@ public class Settings {
 				log.log( Level.SEVERE, "Unknown setting: {0}; ignored", setting);
 		}
 	}
+
+    public String getStudyName(){
+        return studyName;
+    }
+
+    public String getSiteName(){
+        return siteName;
+    }
 
 	public String getIDHeader(){
 		return idHeader;
@@ -178,9 +218,16 @@ public class Settings {
 	public String getIDOutFileName(){
 		return fileSettings.getIDOutFileName();
 	}
-	public String getRegOutFileName(){
-		return fileSettings.getRegOutFileName();
-	}
+//	public String getRegOutFileName(){
+//		return fileSettings.getRegOutFileName();
+//	}
+    public String getOCDUSubjectRegFile(){
+        return fileSettings.getOCDUSubjectRegFile();
+    }
+    public String getOCDUEventRegFile(){
+        return fileSettings.getOCDUEventRegFile();
+    }
+
 	public String getTestResultDir(){
 		return FileSettings.getTestResultDir();
 	}
@@ -197,11 +244,19 @@ public class Settings {
 		return fileSettings.getFullOutDir();
 	}
 
-	public String getRegistrationHeader(int maxNrVisits){
-		String visits="";
-		for(int i=0; i<maxNrVisits; i++) visits+="\tV"+(i+1);
-		return registrationHeader+visits;
-	}
+	public String getOCDUSubjectRegHeader(){
+        return ocduSubjectRegistrationHeader;
+    }
+
+    public String getOCDUEventRegHeader(){
+        return ocduEventRegistrationHeader;
+    }
+
+//	public String getRegistrationHeader(int maxNrVisits){
+//		String visits="";
+//		for(int i=0; i<maxNrVisits; i++) visits+="\tV"+(i+1);
+//		return registrationHeader+visits;
+//	}
 
 	public String translateGender(String gender){
 		try {
@@ -235,13 +290,29 @@ public class Settings {
 	private String idHeader;
 	private String registrationHeader;
 
+    private String studyName;
+    private String siteName="";
+
 	private int maxID=0;
 	private int visitNr;
+    private String visitName;
 
-	private final String ocStudySubjectIDDef="StudySubjectID";
-	private final String ocPersonIDDef="PersonID";
-	private final String ocGenderDef="Gender";
-	private final String ocDOBDef="Date_of_Birth";
+	private static final String ocStudySubjectIDDef="StudySubjectID";
+	private static final String ocPersonIDDef="PersonID";
+	private static final String ocGenderDef="Gender";
+	private static final String ocDOBDef="Date_of_Birth";
+    private static final String ocEnrollmentDef = "Date of Enrollment";
+    private static final String ocSiteDef = "Site (optional)";
+    private static final String ocStudyNameDef = "Study";
+    private String ocduSubjectRegistrationHeader;
+
+    private static final String ocEventNameDef = "Event Name";
+    private static final String ocStartDateDef = "Start Date";
+    private static final String ocSiteDef2 = "Site";
+    private static final String ocLocationDef = "Location";
+    private static final String ocStudyDef = "Study";
+    private static final String ocRepeatNrDef = "Repeat Number";
+    private String ocduEventRegistrationHeader;
 
 	private final IdentifierSettings identifierSettings = new IdentifierSettings();
 	private final FileSettings fileSettings;

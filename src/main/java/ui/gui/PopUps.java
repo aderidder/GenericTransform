@@ -4,9 +4,14 @@ import shared.FileOperations;
 import shared.Shared;
 
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.io.File;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 public class PopUps {
 
@@ -72,10 +77,66 @@ public class PopUps {
         }
     }
 
-    public static String visitNrPopup(){
-        return JOptionPane.showInputDialog("Please supply a visitNr: ");
+    public static List<String> visitNrPopup() {
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        JTextField eventName = new JTextField(10);
+        eventName.addAncestorListener( new RequestFocusListener() );
+        JTextField eventNumber = new JTextField(10);
+
+        panel.add(new JLabel("Event name:"));
+        panel.add(eventName);
+        panel.add(new JLabel("Event number: "));
+        panel.add(eventNumber);
+        eventName.requestFocusInWindow();
+        JOptionPane.showConfirmDialog(null, panel, "Event info: ", JOptionPane.OK_CANCEL_OPTION);
+
+        return Arrays.asList(eventName.getText(), eventNumber.getText());
     }
 
     private static String newline = Shared.newLine;
     private static final double version = 1.0;
+}
+
+// Taken from https://tips4java.wordpress.com/2010/03/14/dialog-focus/
+// This allows us to give focus to the Dialog's evenName field
+class RequestFocusListener implements AncestorListener
+{
+    private boolean removeListener;
+
+    /*
+     *  Convenience constructor. The listener is only used once and then it is
+     *  removed from the component.
+     */
+    public RequestFocusListener()
+    {
+        this(true);
+    }
+
+    /*
+     *  Constructor that controls whether this listen can be used once or
+     *  multiple times.
+     *
+     *  @param removeListener when true this listener is only invoked once
+     *                        otherwise it can be invoked multiple times.
+     */
+    public RequestFocusListener(boolean removeListener)
+    {
+        this.removeListener = removeListener;
+    }
+
+    @Override
+    public void ancestorAdded(AncestorEvent e)
+    {
+        JComponent component = e.getComponent();
+        component.requestFocusInWindow();
+
+        if (removeListener)
+            component.removeAncestorListener((AncestorListener) this);
+    }
+
+    @Override
+    public void ancestorMoved(AncestorEvent e) {}
+
+    @Override
+    public void ancestorRemoved(AncestorEvent e) {}
 }

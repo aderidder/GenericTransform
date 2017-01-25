@@ -177,20 +177,50 @@ public class RepeatingPatient extends Patient{
 		return "";
 	}
 
-	public String generateOCPatientEventRegistration(int maxNrVisits){
-		String line="", tmpLine;
-		List<Visit> visitList;
-		List<String> list = new ArrayList<>(visits.keySet());
-		Collections.sort(list);
-		for(String key:list) {
-			visitList = visits.get(key);
-			tmpLine = createOCRegLine(visitList, "_"+key, maxNrVisits);
-			if(!tmpLine.trim().equals("")) line += tmpLine+Shared.newLine;
-		}
+	@Override public String generateOCDUSubjectRegistration(){
+        String line="", tmpLine;
+        List<Visit> visitList;
+        List<String> list = new ArrayList<>(visits.keySet());
+        Collections.sort(list);
+        for(String key:list) {
+            visitList = visits.get(key);
+            tmpLine = createOCDUSubjectRegistrationLine(visitList, "_"+key);
+            if(!tmpLine.trim().equals("")) line += tmpLine+Shared.newLine;
+        }
 
-		if(line.trim().equals("")) return "";
-		return line.substring(0, line.length()-Shared.newLine.length());
+        if(line.trim().equals("")) return "";
+        return line.substring(0, line.length()-Shared.newLine.length());
 	}
+
+	@Override public String generateOCDUEventRegistration(){
+        String line="", tmpLine;
+        List<Visit> visitList;
+        List<String> list = new ArrayList<>(visits.keySet());
+        Collections.sort(list);
+        for(String key:list) {
+            visitList = visits.get(key);
+            tmpLine = createOCDUEventRegistrationLine(visitList, "_"+key);
+            if(!tmpLine.trim().equals("")) line += tmpLine+Shared.newLine;
+        }
+
+        if(line.trim().equals("")) return "";
+        return line.substring(0, line.length()-Shared.newLine.length());
+	}
+
+//	public String generateOCPatientEventRegistration(int maxNrVisits){
+//		String line="", tmpLine;
+//		List<Visit> visitList;
+//		List<String> list = new ArrayList<>(visits.keySet());
+//		Collections.sort(list);
+//		for(String key:list) {
+//			visitList = visits.get(key);
+//			tmpLine = createOCRegLine(visitList, "_"+key, maxNrVisits);
+//			if(!tmpLine.trim().equals("")) line += tmpLine+Shared.newLine;
+//		}
+//
+//		if(line.trim().equals("")) return "";
+//		return line.substring(0, line.length()-Shared.newLine.length());
+//	}
 	
 	
 	public String generateIDRegistration(){

@@ -57,17 +57,41 @@ public class Identifiers {
     }
 
     // generate the Event Registration File
-    public void writeOCPatientEventRegistration(){
+//    public void writeOCPatientEventRegistration(){
+//        String line;
+//        BufferedWriter bufferedWriter = FileOperations.openFileWriter(settings.getBaseDir()+ settings.getRegOutFileName());
+//        // write the header, which is based on the maxNrVisits, as each visit will get a Vx column
+//        FileOperations.writeLine(bufferedWriter, settings.getRegistrationHeader(maxNrVisits));
+//        // for each patient in our table, generate the Event Registration and write it to the file
+//        for(Patient patient:keyToPatient.values()){
+//            line = patient.generateOCPatientEventRegistration(maxNrVisits);
+//            if(!line.trim().equals("")) FileOperations.writeLine(bufferedWriter, line);
+//        }
+//
+//        FileOperations.closeFileWriter(bufferedWriter);
+//    }
+
+    public void writeOCDUSubjectRegistrationFile(){
         String line;
-        BufferedWriter bufferedWriter = FileOperations.openFileWriter(settings.getBaseDir()+ settings.getRegOutFileName());
-        // write the header, which is based on the maxNrVisits, as each visit will get a Vx column
-        FileOperations.writeLine(bufferedWriter, settings.getRegistrationHeader(maxNrVisits));
-        // for each patient in our table, generate the Event Registration and write it to the file
+        BufferedWriter bufferedWriter = FileOperations.openFileWriter(settings.getBaseDir()+ settings.getOCDUSubjectRegFile());
+        FileOperations.writeLine(bufferedWriter, settings.getOCDUSubjectRegHeader());
+        // for each patient in our table, generate the Subject Registration and write it to the file
         for(Patient patient:keyToPatient.values()){
-            line = patient.generateOCPatientEventRegistration(maxNrVisits);
+            line = patient.generateOCDUSubjectRegistration();
             if(!line.trim().equals("")) FileOperations.writeLine(bufferedWriter, line);
         }
+        FileOperations.closeFileWriter(bufferedWriter);
+    }
 
+    public void writeOCDUEventRegistrationFile(){
+        String line;
+        BufferedWriter bufferedWriter = FileOperations.openFileWriter(settings.getBaseDir()+ settings.getOCDUEventRegFile());
+        FileOperations.writeLine(bufferedWriter, settings.getOCDUEventRegHeader());
+        // for each patient in our table, generate the Event Registration and write it to the file
+        for(Patient patient:keyToPatient.values()){
+            line = patient.generateOCDUEventRegistration();
+            if(!line.trim().equals("")) FileOperations.writeLine(bufferedWriter, line);
+        }
         FileOperations.closeFileWriter(bufferedWriter);
     }
 

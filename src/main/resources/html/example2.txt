@@ -14,6 +14,10 @@
       Let's say we've configured our OpenClinica study in such a way, that we're not interested in gender, but the year of birth is necessary. Furthermore, we'll be generating the identifiers, as we want to create study specific ones. Our settings file looks like this:
       <table>
          <tr>
+            <td>StudyName</td>
+            <td>CTMM-ESRA</td>
+         </tr>
+         <tr>
             <td>GenerateIdentifiers</td>
             <td>Y</td>
          </tr>

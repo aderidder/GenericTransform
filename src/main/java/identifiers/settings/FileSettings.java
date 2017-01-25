@@ -25,10 +25,18 @@ public class FileSettings {
         if (customIDOutFileName.equalsIgnoreCase("")) return "idFile_"+ DateOperations.getNow()+".txt";
         return customIDOutFileName;
     }
-    String getRegOutFileName(){
-        if (customRegOutFileName.equalsIgnoreCase("")) return "registrationFile_"+ DateOperations.getNow()+".txt";
-        return customRegOutFileName;
+//    String getRegOutFileName(){
+//        if (customRegOutFileName.equalsIgnoreCase("")) return "registrationFile_"+ DateOperations.getNow()+".txt";
+//        return customRegOutFileName;
+//    }
+    String getOCDUSubjectRegFile(){
+        return "ocduSubjectRegistrationFile_"+ DateOperations.getNow()+".txt";
     }
+
+    String getOCDUEventRegFile(){
+        return "ocduEventRegistrationFile_"+ DateOperations.getNow()+".txt";
+    }
+
     String getDataOutFileName(Template template, int visit){
         if(customDataOutFileName.equalsIgnoreCase("")){
             String templateName = template.getTemplateName();

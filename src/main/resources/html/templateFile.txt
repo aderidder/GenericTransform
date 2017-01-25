@@ -92,6 +92,18 @@
             <td></td>
          </tr>
          <tr>
+            <td>CRFName</td>
+            <td>Specify "CRFName" as Item_Name and as Action and set its name in the Value column</td>
+            <td>Requires: Value/TranslateTo</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>CRFVersion</td>
+            <td>Specify "CRFVersion" as Item_Name and as Action and set its version in the Value column</td>
+            <td>Requires: Value/TranslateTo</td>
+            <td></td>
+         </tr>
+         <tr>
             <td>None</td>
             <td>Do nothing for this item</td>
             <td>Requires: nothing</td>
@@ -119,6 +131,12 @@
          <tr>
             <td>Translate</td>
             <td>Translate the value specified in the datacolumn from one value to another</td>
+            <td>Requires: datacolumn, translate from, translate to</td>
+            <td>This item can take multiple rows. Also, the translate to column can contain duplicates.</td>
+         </tr>
+         <tr>
+            <td>TranslateMulti</td>
+            <td>Splits the value specified in datacolumn by "," and then attempts to translates each value found</td>
             <td>Requires: datacolumn, translate from, translate to</td>
             <td>This item can take multiple rows. Also, the translate to column can contain duplicates.</td>
          </tr>

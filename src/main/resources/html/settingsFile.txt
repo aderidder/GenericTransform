@@ -21,6 +21,20 @@
             <th>Example</th>
          </tr>
          <tr>
+            <td>STUDYNAME</td>
+            <td>Always</td>
+            <td>Text</td>
+            <td>Studyname as defined in OC</td>
+            <td></td>
+         </tr>
+         <tr>
+            <td>SITENAME</td>
+            <td>Optional</td>
+            <td>Text</td>
+            <td>Sitename as defined in OC</td>
+            <td></td>
+         </tr>
+         <tr>
             <td>GENERATEIDENTIFIERS</td>
             <td>Always</td>
             <td>Y or N</td>
@@ -130,8 +144,8 @@
             <td>REPEATCOLDEF</td>
             <td></td>
             <td></td>
-            <td>The column to use for a repeating column (e.g. biological nr)</td>
-            <td></td>
+            <td>The column to use for a repeating StudySubject (e.g. biological nr), This is attached to the StudySubjectID and, if extendPersonID is used, to the PersonID</td>
+            <td>SS: ESRA-55-0001_&lt;bio_nr&gt;, so SS: ESRA-55-0001_1</td>
          </tr>
          <tr>
             <td>DATEFORMAT</td>
@@ -193,10 +207,14 @@
             <td>July; Jul; 07; 7</td>
          </tr>
       </table>
-      These components are generally separated by e.g. a - or a /, e.g. d-M-y, d/M/y. Furthermore, if your data has a very specific format, e.g. year always has four digits, you can specify your year as yyyy, but this is not required. 
+      These components are generally separated by e.g. a - or a /, e.g. d-M-y, d/M/y. Furthermore, if your data has a very specific format, e.g. year always has four digits, you can specify your year as yyyy, but this is not required.
       <h2>Simple Example</h2>
       The following is an example of what a minimal settings file could look like:
       <table>
+         <tr>
+            <td>StudyName</td>
+            <td>CTMM-ESRA</td>
+         </tr>
          <tr>
             <td>GenerateIdentifiers</td>
             <td>N</td>
@@ -225,11 +243,15 @@
             <td>DateFormat</td>
             <td>yyyy-M-dd</td>
          </tr>
-      </table>   
+      </table>
 
       <h2>More Complicated Example</h2>
       The following is a more complicated example, which also includes gender, date of birth and generating studysubject identifiers.
       <table>
+         <tr>
+            <td>StudyName</td>
+            <td>CTMM-ESRA</td>
+         </tr>
          <tr>
             <td>GenerateIdentifiers</td>
             <td>Y</td>
@@ -245,7 +267,7 @@
          <tr>
             <td>StudySubjectIDPrefix</td>
             <td>TR-56-</td>
-         </tr>   
+         </tr>
          <tr>
             <td>VisitDateDef</td>
             <td>dateOfVisit</td>
@@ -282,7 +304,7 @@
             <td>DateFormat</td>
             <td>yyyy-M-dd</td>
          </tr>
-      </table>   
+      </table>
 
    </body>
 </html>

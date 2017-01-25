@@ -3,6 +3,7 @@ package template.item;
 import identifiers.identifiers.Identifiers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,8 +80,11 @@ public abstract class TemplateItem implements Cloneable {
                 case STUDYSUBJECTID:
                     templateItem = new StudySubjectIDItem(itemName, groupID);
                     break;
-                case EVENTNR:
-                    templateItem = new EventNrItem(itemName, groupID);
+                case CRFNAME:
+                    templateItem = new StaticItem(itemName, groupID);
+                    break;
+                case CRFVERSION:
+                    templateItem = new StaticItem(itemName, groupID);
                     break;
                 case TODAY:
                     templateItem = new TodayItem(itemName, groupID);
@@ -248,18 +252,3 @@ public abstract class TemplateItem implements Cloneable {
 
 	static final Logger log = Logging.getLogger();
 }
-//
-//class TemplateChecker{
-//    static boolean validLine(String [] splitLine){
-//        if(!validType(splitLine[TemplateIndex.groupIDIndex])) return false;
-//        return true;
-//    }
-//
-//    static boolean validType(String type){
-//        if(type.equalsIgnoreCase("id")||(type.equalsIgnoreCase("n"))) return true;
-//        Matcher matcher = splitPattern.matcher(type);
-//        if(matcher.matches()) return true;
-//        return false;
-//    }
-//    private static final Pattern splitPattern = Pattern.compile("(G\\d+)\\s*");
-//}

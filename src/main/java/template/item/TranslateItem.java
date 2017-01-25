@@ -28,11 +28,6 @@ public class TranslateItem extends TemplateItem {
 		String value, newValue;
 		try {
             value = getInputValue(inputRecord);
-
-            // why are we doing this? are we expecting multiple inputvalues in this case?
-//			List<String> splitString = OperatorOperations.splitStatement(value, ",", false);
-
-//			newValue = splitString.stream().map(this::checkKey).collect(Collectors.joining(", "));
             newValue = checkKey(value);
 
             outputRecord.setValue(getUID(), newValue);

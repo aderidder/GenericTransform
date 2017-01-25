@@ -149,14 +149,22 @@ public class SimplePatient extends Patient{
 		return ocPersonID;
 	}
 
-	public String generateOCPatientEventRegistration(int maxNrVisits){
-		return createOCRegLine(visits, maxNrVisits);
-	}
+//	public String generateOCPatientEventRegistration(int maxNrVisits){
+//		return createOCRegLine(visits, maxNrVisits);
+//	}
 	
 	public String generateIDRegistration(){
 		String line = createIDRegLine(visits, "")+Shared.newLine;
 		return line.substring(0, line.length()-Shared.newLine.length());
 	}
+
+    @Override public String generateOCDUSubjectRegistration(){
+        return createOCDUSubjectRegistrationLine(visits);
+    }
+
+    @Override public String generateOCDUEventRegistration(){
+        return createOCDUEventRegistrationLine(visits);
+    }
 
 	private final List<Visit> visits = new ArrayList<>();
 }

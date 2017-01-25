@@ -4,6 +4,7 @@ import identifiers.identifiers.Identifiers;
 
 import java.io.BufferedWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +32,10 @@ public class OutputData{
             // the bookkeeper wil then allow us to reference the items by name
 			bookkeeper = new Bookkeeper(template.getUidList());
             // the header is variant, but with the proper formatting for the output (e.g. _G1)
-			header = template.getHeader();
+//			header = new ArrayList<>(Arrays.asList("Study", "Site", "EventName", "EventRepeat", "CRFName", "CRFVersion"));
+            header = new ArrayList<>(Arrays.asList("Study", "Site", "EventName", "EventRepeat"));
+
+			header.addAll(template.getHeader());
 			size = template.getUidList().size();
 		} catch(Exception e){
 			log.log(Level.SEVERE, "Problem during setup of output data. Error is: {0}", e.getMessage());
@@ -50,7 +54,7 @@ public class OutputData{
                 // check whether it has the proper visitNr
 				if (identifiers.isVisitNr(inputRecord, visitNr)) {
                     // if it does, create a new outputRecord
-					outputRecord = new Record(size, bookkeeper);
+					outputRecord = new OutputRecord(size, bookkeeper);
                     // and apply the template to the input and output record
 					template.apply(inputRecord, outputRecord);
                     // add the outputRecord to the list

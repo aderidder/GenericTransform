@@ -78,7 +78,7 @@ public class Record implements Comparable<Record>{
         for(int i=0; i<size; i++) record.add("");
     }
 
-    private List<String> record;
+    List<String> record;
 	private final Bookkeeper bookkeeper;
 	private static final Logger log = Logging.getLogger();
 }
