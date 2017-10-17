@@ -10,6 +10,8 @@ import ui.gui.GenericTransformGUI;
 import javax.swing.*;
 import java.io.*;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FileOperations{
 //	public static String getHTMLURLString(String fileName){
@@ -46,7 +48,7 @@ public class FileOperations{
             }
             return true;
         } catch(Exception e){
-            System.out.println("Problem creating directory: "+directory);
+			log.log(Level.SEVERE, "Problem creating directory: "+directory);
         }
         return false;
     }
@@ -60,7 +62,7 @@ public class FileOperations{
             if(charset==null) charset = charsetDefaultIn;
             in = new BufferedReader(new InputStreamReader(new FileInputStream(new File(fileName)),charset));
 		} catch (Exception e){
-			System.out.println("Error opening file "+fileName+newLine+"Error is: "+e.toString());
+			log.log(Level.SEVERE, "Error opening file "+fileName+newLine+"Error is: "+e.toString());
 		}
 		return in;
 	}
@@ -76,8 +78,8 @@ public class FileOperations{
             //Construct the BufferedWriter object
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName, append), charsetDefaultOut));
 		} catch (Exception e) {
-			e.printStackTrace();
-		} 
+			log.log(Level.SEVERE, "Error creating output file "+fileName+newLine+"Error is: "+e.toString());
+		}
 		return out;
 	}
 
@@ -129,6 +131,7 @@ public class FileOperations{
 	private static final String charsetDefaultOut = "windows-1252";
 	private static final String newLine = System.lineSeparator();
 	private static JTextArea logArea;
+	private static final Logger log = Logging.getLogger();
 }
 
 class DetectCharset {
