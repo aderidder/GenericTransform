@@ -4,3 +4,4 @@
 /.idea
 /META-INF
 /GenericTransform/*.iml
+target/

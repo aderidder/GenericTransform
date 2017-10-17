@@ -30,11 +30,11 @@ public class FileSettings {
 //        return customRegOutFileName;
 //    }
     String getOCDUSubjectRegFile(){
-        return "ocduSubjectRegistrationFile_"+ DateOperations.getNow()+".txt";
+        return "ocdiSubjectRegistrationFile_"+ DateOperations.getNow()+".txt";
     }
 
     String getOCDUEventRegFile(){
-        return "ocduEventRegistrationFile_"+ DateOperations.getNow()+".txt";
+        return "ocdiEventRegistrationFile_"+ DateOperations.getNow()+".txt";
     }
 
     String getDataOutFileName(Template template, int visit){

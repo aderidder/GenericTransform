@@ -290,7 +290,7 @@ public class Settings {
 	private String idHeader;
 	private String registrationHeader;
 
-    private String studyName;
+    private String studyName="";
     private String siteName="";
 
 	private int maxID=0;

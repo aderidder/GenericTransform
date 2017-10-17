@@ -32,8 +32,7 @@ public class OutputData{
             // the bookkeeper wil then allow us to reference the items by name
 			bookkeeper = new Bookkeeper(template.getUidList());
             // the header is variant, but with the proper formatting for the output (e.g. _G1)
-//			header = new ArrayList<>(Arrays.asList("Study", "Site", "EventName", "EventRepeat", "CRFName", "CRFVersion"));
-            header = new ArrayList<>(Arrays.asList("Study", "Site", "EventName", "EventRepeat"));
+            header = new ArrayList<>(Arrays.asList("Unique Protocol ID", "Site", "EventName", "EventRepeat"));
 
 			header.addAll(template.getHeader());
 			size = template.getUidList().size();
