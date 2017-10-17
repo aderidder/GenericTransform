@@ -97,6 +97,7 @@ public class Settings {
 		}
 		catch (Exception e) {
 			log.log( Level.SEVERE, "IdentifierSettings: Problem with the arguments in the settings file.\n{0}", e.getMessage());
+			throw new RuntimeException();
 		} finally{
 			FileOperations.closeFileReader(bufferedReader);
 		}
